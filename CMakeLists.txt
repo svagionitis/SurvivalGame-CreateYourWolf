@@ -17,7 +17,9 @@ SET(LIBS ${CMAKE_THREAD_LIBS_INIT} ncurses)
 INCLUDE_DIRECTORIES(src)
 
 # Set the source file
-SET(SNAKENCURSES_SRC src/main.c)
+SET(SNAKENCURSES_SRC src/utils.c
+		     src/header.c
+		     src/main.c)
 
 ADD_EXECUTABLE(wolf ${SNAKENCURSES_SRC})
 

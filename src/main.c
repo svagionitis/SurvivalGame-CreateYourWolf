@@ -8,6 +8,8 @@
 #include <sys/time.h>
 #include <curses.h>
 #include <pthread.h>
+#include "utils.h"
+#include "header.h"
 
 #define MAX_MOVES 20
 #define MAX_ATTACKS 10
@@ -15,12 +17,6 @@
 #define MAX_BEARS 1
 #define MAX_STONES 1
 #define MAX_WOLVES 1
-
-typedef struct window_settings
-{
-    int maxWidth;
-    int maxHeight;
-}window_settings_t;
 
 window_settings_t win_set;
 
@@ -105,28 +101,6 @@ void populate_wolf(void)
     }
 
 
-}
-
-void color_str(WINDOW *win, int y, int x, short fg_color, short bg_color, const char * str)
-{
-    short i;
-    // Search all the pair of colors
-    // to match with the given one.
-    // Then apply the specific pair.
-    // Naive way
-    for (i = 0;i < COLOR_PAIRS;i++)
-    {
-        short f, b;
-        pair_content(i, &f, &b);
-        if (f == fg_color && b == bg_color)
-            break;
-    }
-
-    wattron(win, COLOR_PAIR(i));
-
-    mvwaddstr(win, y, x, str);
-
-    wattroff(win, COLOR_PAIR(i));
 }
 
 
