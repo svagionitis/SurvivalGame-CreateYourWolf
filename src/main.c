@@ -10,6 +10,7 @@
 #include <pthread.h>
 #include "utils.h"
 #include "header.h"
+#include "footer.h"
 
 #define MAX_MOVES 20
 #define MAX_ATTACKS 10
@@ -19,6 +20,7 @@
 #define MAX_WOLVES 1
 
 window_settings_t win_set;
+WINDOW *main_win;
 
 typedef enum moves {UP, DOWN, RIGHT, LEFT, HOLD, LAST_MOVE} moves_t;
 typedef enum attacks {ROCK, PAPER, SCISSORS, SUICIDE, LAST_ATTACK} attacks_t;
@@ -117,6 +119,19 @@ int main(int argc, char *argv[])
     // Get the maximum size of the screen
     getmaxyx(stdscr, win_set.maxHeight, win_set.maxWidth);
 
+    // Create window for the header rows
+    header_win = newwin(HEADER_ROWS, win_set.maxWidth, 0, 0);
+
+    // Create window for the footer rows
+    footer_win = newwin(FOOTER_ROWS, win_set.maxWidth, win_set.maxHeight - FOOTER_ROWS, 0);
+
+    // Create main window, it's between the header and the footer
+    main_win = newwin(win_set.maxWidth - HEADER_ROWS - FOOTER_ROWS, win_set.maxWidth, HEADER_ROWS, 0);
+
+    getmaxyx(header_win, win_set.maxHeaderHeight, win_set.maxHeaderWidth);
+    getmaxyx(footer_win, win_set.maxFooterHeight, win_set.maxFooterWidth);
+    getmaxyx(main_win, win_set.maxMainHeight, win_set.maxMainWidth);
+
     // Check if colors are supported
     if (!has_colors())
     {
@@ -169,5 +184,9 @@ int main(int argc, char *argv[])
 
 
 
+    delwin(header_win);
+    delwin(footer_win);
+    endwin();
 
+    return 0;
 }

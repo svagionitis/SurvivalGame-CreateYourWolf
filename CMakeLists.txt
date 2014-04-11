@@ -19,6 +19,7 @@ INCLUDE_DIRECTORIES(src)
 # Set the source file
 SET(SNAKENCURSES_SRC src/utils.c
 		     src/header.c
+		     src/footer.c
 		     src/main.c)
 
 ADD_EXECUTABLE(wolf ${SNAKENCURSES_SRC})
