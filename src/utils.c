@@ -29,6 +29,10 @@ void init_seed_srand(void)
 {
     struct timeval t;
 
+    // Sleep 10 usec in order 
+    // not to have the same seed
+    usleep(10);
+
     gettimeofday(&t, NULL);
 
     srand(t.tv_usec * t.tv_sec);
