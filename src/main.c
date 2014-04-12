@@ -18,6 +18,8 @@
 #define MAX_BEARS 1
 #define MAX_STONES 1
 #define MAX_WOLVES 1
+#define MAX_SURROUNDING_WIDTH 3
+#define MAX_SURROUNDING_HEIGHT 3
 
 window_settings_t win_set;
 WINDOW *main_win;
@@ -32,6 +34,7 @@ typedef struct animal
     int y;
     moves_t moves[MAX_MOVES];
     attacks_t attacks[MAX_ATTACKS];
+    char surroundings[MAX_SURROUNDING_WIDTH][MAX_SURROUNDING_HEIGHT];
 }animal_t;
 
 animal_t lion, bear, stone, wolf;
@@ -39,15 +42,43 @@ animal_t lion, bear, stone, wolf;
 void populate_lion(void)
 {
     lion.type = 'L';
+
+    // Put random coordinates
+    // the first time
+    struct timeval t;
+    gettimeofday(&t, NULL);
+
+    // Seed microseconds
+    srand(t.tv_usec * t.tv_sec);
+    lion.x = win_set.maxMainWidth * ((double)rand()/RAND_MAX);
+    lion.y = win_set.maxMainHeight * ((double)rand()/RAND_MAX);
+
+
     lion.moves[0] = DOWN;
     lion.moves[1] = RIGHT;
     lion.attacks[0] = PAPER;
     lion.attacks[1] = SCISSORS;
 }
 
+void print_lion(void)
+{
+    color_str(main_win, lion.y, lion.x, 0, COLOR_BLACK, "L");
+}
+
 void populate_bear(void)
 {
     bear.type = 'B';
+
+    // Put random coordinates
+    // the first time
+    struct timeval t;
+    gettimeofday(&t, NULL);
+
+    // Seed microseconds
+    srand(t.tv_usec * t.tv_sec);
+    bear.x = win_set.maxMainWidth * ((double)rand()/RAND_MAX);
+    bear.y = win_set.maxMainHeight * ((double)rand()/RAND_MAX);
+
     bear.moves[0] = DOWN;
     bear.moves[1] = DOWN;
     bear.moves[2] = DOWN;
@@ -67,16 +98,47 @@ void populate_bear(void)
     bear.attacks[0] = PAPER;
 }
 
+void print_bear(void)
+{
+    color_str(main_win, bear.y, bear.x, 0, COLOR_BLACK, "B");
+}
+
 void populate_stone(void)
 {
     stone.type = 'S';
+
+    // Put random coordinates
+    // the first time
+    struct timeval t;
+    gettimeofday(&t, NULL);
+
+    // Seed microseconds
+    srand(t.tv_usec * t.tv_sec);
+    stone.x = win_set.maxMainWidth * ((double)rand()/RAND_MAX);
+    stone.y = win_set.maxMainHeight * ((double)rand()/RAND_MAX);
+
     stone.moves[0] = HOLD;
     stone.attacks[0] = ROCK;
+}
+
+void print_stone(void)
+{
+    color_str(main_win, stone.y, stone.x, 0, COLOR_BLACK, "S");
 }
 
 void populate_wolf(void)
 {
     wolf.type = 'W';
+
+    // Put random coordinates
+    // the first time
+    struct timeval t;
+    gettimeofday(&t, NULL);
+
+    // Seed microseconds
+    srand(t.tv_usec * t.tv_sec);
+    wolf.x = win_set.maxMainWidth * ((double)rand()/RAND_MAX);
+    wolf.y = win_set.maxMainHeight * ((double)rand()/RAND_MAX);
 
     // Random moves
     for (int i = 0;i < MAX_MOVES;i++)
@@ -103,6 +165,11 @@ void populate_wolf(void)
     }
 
 
+}
+
+void print_wolf(void)
+{
+    color_str(main_win, wolf.y, wolf.x, 0, COLOR_BLACK, "W");
 }
 
 
