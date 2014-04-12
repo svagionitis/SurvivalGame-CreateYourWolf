@@ -46,11 +46,9 @@ void populate_lion(void)
 
     // Put random coordinates
     // the first time
-    struct timeval t;
-    gettimeofday(&t, NULL);
 
-    // Seed microseconds
-    srand(t.tv_usec * t.tv_sec);
+    init_seed_srand();
+
     lion.x = win_set.maxMainWidth * ((double)rand()/RAND_MAX);
     lion.y = win_set.maxMainHeight * ((double)rand()/RAND_MAX);
 
@@ -72,11 +70,9 @@ void populate_bear(void)
 
     // Put random coordinates
     // the first time
-    struct timeval t;
-    gettimeofday(&t, NULL);
 
-    // Seed microseconds
-    srand(t.tv_usec * t.tv_sec);
+    init_seed_srand();
+
     bear.x = win_set.maxMainWidth * ((double)rand()/RAND_MAX);
     bear.y = win_set.maxMainHeight * ((double)rand()/RAND_MAX);
 
@@ -133,22 +129,16 @@ void populate_wolf(void)
 
     // Put random coordinates
     // the first time
-    struct timeval t;
-    gettimeofday(&t, NULL);
 
-    // Seed microseconds
-    srand(t.tv_usec * t.tv_sec);
+    init_seed_srand();
+
     wolf.x = win_set.maxMainWidth * ((double)rand()/RAND_MAX);
     wolf.y = win_set.maxMainHeight * ((double)rand()/RAND_MAX);
 
     // Random moves
     for (int i = 0;i < MAX_MOVES;i++)
     {
-        struct timeval t;
-        gettimeofday(&t, NULL);
-
-        // Seed microseconds
-        srand(t.tv_usec * t.tv_sec);
+        init_seed_srand();
 
         wolf.moves[i] = rand() % LAST_MOVE;
     }
@@ -156,11 +146,7 @@ void populate_wolf(void)
     // Random attacks
     for (int j = 0;j < MAX_ATTACKS;j++)
     {
-        struct timeval t;
-        gettimeofday(&t, NULL);
-
-        // Seed microseconds
-        srand(t.tv_usec * t.tv_sec);
+        init_seed_srand();
 
         wolf.attacks[j] = rand() % LAST_ATTACK;
     }
