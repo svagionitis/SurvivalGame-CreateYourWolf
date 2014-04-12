@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sys/time.h>
+#include <unistd.h>
 #include "utils.h"
 
 void color_str(WINDOW *win, int y, int x, short fg_color, short bg_color, const char *str)

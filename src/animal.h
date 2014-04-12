@@ -5,8 +5,7 @@
 
 #define MAX_MOVES 20
 #define MAX_ATTACKS 10
-#define MAX_SURROUNDING_WIDTH 3
-#define MAX_SURROUNDING_HEIGHT 3
+#define MAX_SURROUNDING_RADIUS 1
 #define MAX_LIONS 1
 #define MAX_BEARS 1
 #define MAX_STONES 1
@@ -22,13 +21,13 @@ typedef struct animal
     int y;
     moves_t moves[MAX_MOVES];
     attacks_t attacks[MAX_ATTACKS];
-    char surroundings[MAX_SURROUNDING_WIDTH][MAX_SURROUNDING_HEIGHT];
 }animal_t;
 
 // Animal window
 WINDOW *animal_win;
 
 void populate_lion(void);
+void print_animal(WINDOW *, animal_t);
 void print_lion(WINDOW *);
 void populate_bear(void);
 void print_bear(WINDOW *);

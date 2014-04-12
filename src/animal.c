@@ -25,11 +25,6 @@ void populate_lion(void)
     lion.attacks[1] = SCISSORS;
 }
 
-void print_lion(WINDOW *win)
-{
-    color_str(win, lion.y, lion.x, 0, COLOR_BLACK, "L");
-}
-
 void populate_bear(void)
 {
     bear.type = 'B';
@@ -61,11 +56,6 @@ void populate_bear(void)
     bear.attacks[0] = PAPER;
 }
 
-void print_bear(WINDOW *win)
-{
-    color_str(win, bear.y, bear.x, 0, COLOR_BLACK, "B");
-}
-
 void populate_stone(void)
 {
     stone.type = 'S';
@@ -80,11 +70,6 @@ void populate_stone(void)
 
     stone.moves[0] = HOLD;
     stone.attacks[0] = ROCK;
-}
-
-void print_stone(WINDOW *win)
-{
-    color_str(win, stone.y, stone.x, 0, COLOR_BLACK, "S");
 }
 
 void populate_wolf(void)
@@ -116,9 +101,34 @@ void populate_wolf(void)
     }
 }
 
-void print_wolf(WINDOW *win)
+void print_animal(WINDOW *win, animal_t animal)
 {
-    color_str(win, wolf.y, wolf.x, 0, COLOR_BLACK, "W");
+    color_str(win, animal.y, animal.x, 0, COLOR_BLACK, (const char *)&animal.type);
+
+    // Print surrounding of radius MAX_SURROUNDING_RADIUS
+    for (int i = 1;i <= MAX_SURROUNDING_RADIUS;i++)
+    {
+        if (animal.x + i < win_set.maxAnimalWidth)
+            color_str(win, animal.y, animal.x + i, 0, COLOR_WHITE, " ");
+
+        if (animal.x - i >= 0)
+            color_str(win, animal.y, animal.x - i, 0, COLOR_WHITE, " ");
+
+        if (animal.y + i < win_set.maxAnimalHeight)
+            color_str(win, animal.y + i, animal.x, 0, COLOR_WHITE, " ");
+
+        if (animal.y - i >= 0)
+            color_str(win, animal.y - i, animal.x, 0, COLOR_WHITE, " ");
+
+        if (animal.x + i < win_set.maxAnimalWidth && animal.y + i < win_set.maxAnimalHeight)
+            color_str(win, animal.y + i, animal.x + i, 0, COLOR_WHITE, " ");
+        if (animal.x + i < win_set.maxAnimalWidth && animal.y - i >= 0)
+            color_str(win, animal.y - i, animal.x + i, 0, COLOR_WHITE, " ");
+        if (animal.x - i >= 0 && animal.y + i < win_set.maxAnimalHeight)
+            color_str(win, animal.y + i, animal.x - i, 0, COLOR_WHITE, " ");
+        if (animal.x - i >= 0 && animal.y - i >= 0)
+            color_str(win, animal.y - i, animal.x - i, 0, COLOR_WHITE, " ");
+    }
 }
 
 
@@ -128,10 +138,10 @@ void print_animals(WINDOW *win)
 
     wclear(win);
 
-    print_lion(win);
-    print_bear(win);
-    print_stone(win);
-    print_wolf(win);
+    print_animal(win, lion);
+    print_animal(win, bear);
+    print_animal(win, stone);
+    print_animal(win, wolf);
 
     wnoutrefresh(win);
 }
