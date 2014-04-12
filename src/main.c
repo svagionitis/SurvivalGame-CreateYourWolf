@@ -11,30 +11,13 @@
 #include "footer.h"
 #include "control.h"
 
-#define MAX_MOVES 20
-#define MAX_ATTACKS 10
 #define MAX_LIONS 1
 #define MAX_BEARS 1
 #define MAX_STONES 1
 #define MAX_WOLVES 1
-#define MAX_SURROUNDING_WIDTH 3
-#define MAX_SURROUNDING_HEIGHT 3
 
 window_settings_t win_set;
 WINDOW *main_win;
-
-typedef enum moves {UP, DOWN, RIGHT, LEFT, HOLD, LAST_MOVE} moves_t;
-typedef enum attacks {ROCK, PAPER, SCISSORS, SUICIDE, LAST_ATTACK} attacks_t;
-
-typedef struct animal
-{
-    char type;
-    int x;
-    int y;
-    moves_t moves[MAX_MOVES];
-    attacks_t attacks[MAX_ATTACKS];
-    char surroundings[MAX_SURROUNDING_WIDTH][MAX_SURROUNDING_HEIGHT];
-}animal_t;
 
 animal_t lion, bear, stone, wolf;
 
@@ -57,9 +40,9 @@ void populate_lion(void)
     lion.attacks[1] = SCISSORS;
 }
 
-void print_lion(void)
+void print_lion(WINDOW *win)
 {
-    color_str(main_win, lion.y, lion.x, 0, COLOR_BLACK, "L");
+    color_str(win, lion.y, lion.x, 0, COLOR_BLACK, "L");
 }
 
 void populate_bear(void)
@@ -93,9 +76,9 @@ void populate_bear(void)
     bear.attacks[0] = PAPER;
 }
 
-void print_bear(void)
+void print_bear(WINDOW *win)
 {
-    color_str(main_win, bear.y, bear.x, 0, COLOR_BLACK, "B");
+    color_str(win, bear.y, bear.x, 0, COLOR_BLACK, "B");
 }
 
 void populate_stone(void)
@@ -114,9 +97,9 @@ void populate_stone(void)
     stone.attacks[0] = ROCK;
 }
 
-void print_stone(void)
+void print_stone(WINDOW *win)
 {
-    color_str(main_win, stone.y, stone.x, 0, COLOR_BLACK, "S");
+    color_str(win, stone.y, stone.x, 0, COLOR_BLACK, "S");
 }
 
 void populate_wolf(void)
@@ -150,11 +133,25 @@ void populate_wolf(void)
 
 }
 
-void print_wolf(void)
+void print_wolf(WINDOW *win)
 {
-    color_str(main_win, wolf.y, wolf.x, 0, COLOR_BLACK, "W");
+    color_str(win, wolf.y, wolf.x, 0, COLOR_BLACK, "W");
 }
 
+
+void print_animals(WINDOW *win)
+{
+    getmaxyx(win, win_set.maxMainHeight, win_set.maxMainWidth);
+
+    wclear(win);
+
+    print_lion(win);
+    print_bear(win);
+    print_stone(win);
+    print_wolf(win);
+
+    wnoutrefresh(win);
+}
 
 int main(int argc, char *argv[])
 {
@@ -181,10 +178,8 @@ int main(int argc, char *argv[])
     footer_win = newwin(FOOTER_ROWS, win_set.maxWidth, win_set.maxHeight - FOOTER_ROWS, 0);
 
     // Create main window, it's between the header and the footer
-    main_win = newwin(win_set.maxWidth - HEADER_ROWS - FOOTER_ROWS, win_set.maxWidth, HEADER_ROWS, 0);
+    main_win = newwin(win_set.maxHeight - HEADER_ROWS - FOOTER_ROWS, win_set.maxWidth, HEADER_ROWS, 0);
 
-    getmaxyx(header_win, win_set.maxHeaderHeight, win_set.maxHeaderWidth);
-    getmaxyx(footer_win, win_set.maxFooterHeight, win_set.maxFooterWidth);
     getmaxyx(main_win, win_set.maxMainHeight, win_set.maxMainWidth);
 
     // Check if colors are supported
@@ -237,6 +232,7 @@ int main(int argc, char *argv[])
     populate_stone();
     populate_wolf();
 
+
     // Put control in a separate thread
     pthread_create(&thread_control, NULL, control, NULL);
 
@@ -244,8 +240,11 @@ int main(int argc, char *argv[])
     {
         print_header(header_win);
 
+        print_animals(main_win);
+
         print_footer(footer_win);
 
+        win_set.days++;
 
         doupdate();
         usleep(win_set.speed);
