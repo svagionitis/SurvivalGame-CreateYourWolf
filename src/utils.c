@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <time.h>
+#include <sys/time.h>
 #include "utils.h"
 
 void color_str(WINDOW *win, int y, int x, short fg_color, short bg_color, const char *str)
@@ -22,3 +25,11 @@ void color_str(WINDOW *win, int y, int x, short fg_color, short bg_color, const 
     wattroff(win, COLOR_PAIR(i));
 }
 
+void init_seed_srand(void)
+{
+    struct timeval t;
+
+    gettimeofday(&t, NULL);
+
+    srand(t.tv_usec * t.tv_sec);
+}

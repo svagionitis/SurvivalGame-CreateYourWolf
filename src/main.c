@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <time.h>
-#include <sys/time.h>
 #include <curses.h>
 #include <pthread.h>
 #include "utils.h"
@@ -106,11 +104,9 @@ void populate_stone(void)
 
     // Put random coordinates
     // the first time
-    struct timeval t;
-    gettimeofday(&t, NULL);
 
-    // Seed microseconds
-    srand(t.tv_usec * t.tv_sec);
+    init_seed_srand();
+
     stone.x = win_set.maxMainWidth * ((double)rand()/RAND_MAX);
     stone.y = win_set.maxMainHeight * ((double)rand()/RAND_MAX);
 
