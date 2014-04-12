@@ -25,12 +25,12 @@ void print_header(WINDOW *win)
     header_width += char_ret[i++];
 
     memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "Main Max Height: %d", win_set.maxMainHeight);
+    char_ret[i] = snprintf(buf, sizeof buf, "Animal Max Height: %d", win_set.maxAnimalHeight);
     color_str(win, 0, ++header_width, 0, 0, buf);
     header_width += char_ret[i++];
 
     memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "Main Max Width: %d", win_set.maxMainWidth);
+    char_ret[i] = snprintf(buf, sizeof buf, "Animal Max Width: %d", win_set.maxAnimalWidth);
     color_str(win, 0, ++header_width, 0, 0, buf);
     header_width += char_ret[i++];
 

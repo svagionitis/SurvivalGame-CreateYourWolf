@@ -21,6 +21,7 @@ SET(SNAKENCURSES_SRC src/utils.c
 		     src/header.c
 		     src/footer.c
 		     src/control.c
+		     src/animal.c
 		     src/main.c)
 
 ADD_EXECUTABLE(wolf ${SNAKENCURSES_SRC})

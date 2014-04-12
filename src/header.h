@@ -11,8 +11,8 @@ typedef struct window_settings
     int maxHeight;
     int maxHeaderWidth;
     int maxHeaderHeight;
-    int maxMainWidth;
-    int maxMainHeight;
+    int maxAnimalWidth;
+    int maxAnimalHeight;
     int maxFooterWidth;
     int maxFooterHeight;
     char c;

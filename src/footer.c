@@ -1,6 +1,7 @@
 #include <string.h>
 #include "footer.h"
 #include "header.h"
+#include "animal.h"
 #include "utils.h"
 
 extern window_settings_t win_set;
