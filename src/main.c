@@ -11,6 +11,7 @@
 #include "utils.h"
 #include "header.h"
 #include "footer.h"
+#include "control.h"
 
 #define MAX_MOVES 20
 #define MAX_ATTACKS 10
@@ -175,6 +176,11 @@ void print_wolf(void)
 
 int main(int argc, char *argv[])
 {
+    pthread_t thread_control;
+
+    memset(&win_set, 0, sizeof win_set);
+    win_set.speed = 100000;
+
     if (argc != 1)
     {
         printf("Usage: %s\n", argv[0]);
@@ -249,7 +255,21 @@ int main(int argc, char *argv[])
     populate_stone();
     populate_wolf();
 
+    // Put control in a separate thread
+    pthread_create(&thread_control, NULL, control, NULL);
 
+    while(win_set.c != 'q')
+    {
+        print_header(header_win);
+
+        print_footer(footer_win);
+
+
+        doupdate();
+        usleep(win_set.speed);
+    }
+
+    pthread_join(thread_control, NULL);
 
     delwin(header_win);
     delwin(footer_win);

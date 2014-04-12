@@ -15,6 +15,10 @@ typedef struct window_settings
     int maxMainHeight;
     int maxFooterWidth;
     int maxFooterHeight;
+    char c;
+    char last_char;
+    int speed;
+    int set_border;
 }window_settings_t;
 
 // Header window
