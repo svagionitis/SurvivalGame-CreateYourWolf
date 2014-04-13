@@ -107,6 +107,11 @@ int main(int argc, char *argv[])
 
         print_animals(animal_win);
 
+        move_animal(&lion);
+        move_animal(&bear);
+        move_animal(&stone);
+        move_animal(&wolf);
+
         print_footer(footer_win);
 
         win_set.days++;

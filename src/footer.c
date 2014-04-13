@@ -28,7 +28,7 @@ void print_footer(WINDOW *win)
     footer_width += char_ret[i++];
 
     memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "days: %d", win_set.days);
+    char_ret[i] = snprintf(buf, sizeof buf, "days: %d days MOD MAX_MOVES: %d", win_set.days, win_set.days % MAX_MOVES);
     color_str(win, 0, ++footer_width, 0, 0, buf);
     footer_width += char_ret[i++];
 

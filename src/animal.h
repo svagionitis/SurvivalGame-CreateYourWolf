@@ -36,5 +36,6 @@ void print_stone(WINDOW *);
 void populate_wolf(void);
 void print_wolf(WINDOW *);
 void print_animals(WINDOW *);
+void move_animal(animal_t *);
 
 #endif /* ANIMAL_H */
