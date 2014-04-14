@@ -113,7 +113,6 @@ void print_animal(WINDOW *win, animal_t animal)
 {
     color_str(win, animal.y, animal.x, 0, COLOR_BLACK, (const char *)&animal.type);
 
-#if 0
     // Print surrounding of radius MAX_SURROUNDING_RADIUS
     if (win_set.set_surrounding_area)
     {
@@ -141,7 +140,6 @@ void print_animal(WINDOW *win, animal_t animal)
                 color_str(win, animal.y - i, animal.x - i, 0, COLOR_WHITE, " ");
         }
     }
-#endif
 }
 
 
