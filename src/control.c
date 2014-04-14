@@ -46,6 +46,13 @@ void *control()
                     win_set.set_border = TRUE;
 
                 break;
+            case 's':
+                if (win_set.set_surrounding_area)
+                    win_set.set_surrounding_area = FALSE;
+                else
+                    win_set.set_surrounding_area = TRUE;
+
+                break;
         }
 
     }
