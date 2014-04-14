@@ -19,6 +19,7 @@ typedef struct window_settings
     char last_char;
     int speed;
     int set_border;
+    int set_surrounding_area;
     int days;
 }window_settings_t;
 

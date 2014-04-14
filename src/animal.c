@@ -113,32 +113,33 @@ void print_animal(WINDOW *win, animal_t animal)
 {
     color_str(win, animal.y, animal.x, 0, COLOR_BLACK, (const char *)&animal.type);
 
-#if 0
     // Print surrounding of radius MAX_SURROUNDING_RADIUS
-    for (int i = 1;i <= MAX_SURROUNDING_RADIUS;i++)
+    if (win_set.set_surrounding_area)
     {
-        if (animal.x + i < win_set.maxAnimalWidth)
-            color_str(win, animal.y, animal.x + i, 0, COLOR_WHITE, " ");
+        for (int i = 1;i <= MAX_SURROUNDING_RADIUS;i++)
+        {
+            if (animal.x + i < win_set.maxAnimalWidth)
+                color_str(win, animal.y, animal.x + i, 0, COLOR_WHITE, " ");
 
-        if (animal.x - i >= 0)
-            color_str(win, animal.y, animal.x - i, 0, COLOR_WHITE, " ");
+            if (animal.x - i >= 0)
+                color_str(win, animal.y, animal.x - i, 0, COLOR_WHITE, " ");
 
-        if (animal.y + i < win_set.maxAnimalHeight)
-            color_str(win, animal.y + i, animal.x, 0, COLOR_WHITE, " ");
+            if (animal.y + i < win_set.maxAnimalHeight)
+                color_str(win, animal.y + i, animal.x, 0, COLOR_WHITE, " ");
 
-        if (animal.y - i >= 0)
-            color_str(win, animal.y - i, animal.x, 0, COLOR_WHITE, " ");
+            if (animal.y - i >= 0)
+                color_str(win, animal.y - i, animal.x, 0, COLOR_WHITE, " ");
 
-        if (animal.x + i < win_set.maxAnimalWidth && animal.y + i < win_set.maxAnimalHeight)
-            color_str(win, animal.y + i, animal.x + i, 0, COLOR_WHITE, " ");
-        if (animal.x + i < win_set.maxAnimalWidth && animal.y - i >= 0)
-            color_str(win, animal.y - i, animal.x + i, 0, COLOR_WHITE, " ");
-        if (animal.x - i >= 0 && animal.y + i < win_set.maxAnimalHeight)
-            color_str(win, animal.y + i, animal.x - i, 0, COLOR_WHITE, " ");
-        if (animal.x - i >= 0 && animal.y - i >= 0)
-            color_str(win, animal.y - i, animal.x - i, 0, COLOR_WHITE, " ");
+            if (animal.x + i < win_set.maxAnimalWidth && animal.y + i < win_set.maxAnimalHeight)
+                color_str(win, animal.y + i, animal.x + i, 0, COLOR_WHITE, " ");
+            if (animal.x + i < win_set.maxAnimalWidth && animal.y - i >= 0)
+                color_str(win, animal.y - i, animal.x + i, 0, COLOR_WHITE, " ");
+            if (animal.x - i >= 0 && animal.y + i < win_set.maxAnimalHeight)
+                color_str(win, animal.y + i, animal.x - i, 0, COLOR_WHITE, " ");
+            if (animal.x - i >= 0 && animal.y - i >= 0)
+                color_str(win, animal.y - i, animal.x - i, 0, COLOR_WHITE, " ");
+        }
     }
-#endif
 }
 
 
