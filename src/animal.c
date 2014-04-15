@@ -15,8 +15,8 @@ void populate_lion(void)
 
     init_seed_srand();
 
-    lion.x = win_set.maxAnimalWidth * ((double)rand()/RAND_MAX);
-    lion.y = win_set.maxAnimalHeight * ((double)rand()/RAND_MAX);
+    lion.x = 5/*win_set.maxAnimalWidth*/ * ((double)rand()/RAND_MAX);
+    lion.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
 
     for (int i = 0;i<MAX_MOVES;i++)
         lion.moves[i] = LAST_MOVE;
@@ -25,6 +25,11 @@ void populate_lion(void)
     lion.moves[1] = RIGHT;
     lion.attacks[0] = PAPER;
     lion.attacks[1] = SCISSORS;
+
+    lion.attack = LAST_ATTACK;
+    lion.winner = -1;
+    lion.looser = -1;
+    lion.isdead = FALSE;
 }
 
 void populate_bear(void)
@@ -36,8 +41,8 @@ void populate_bear(void)
 
     init_seed_srand();
 
-    bear.x = win_set.maxAnimalWidth * ((double)rand()/RAND_MAX);
-    bear.y = win_set.maxAnimalHeight * ((double)rand()/RAND_MAX);
+    bear.x = 5/*win_set.maxAnimalWidth*/ * ((double)rand()/RAND_MAX);
+    bear.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
 
     for (int i = 0;i<MAX_MOVES;i++)
         bear.moves[i] = LAST_MOVE;
@@ -59,6 +64,12 @@ void populate_bear(void)
     bear.moves[14] = LEFT;
     bear.moves[15] = LEFT;
     bear.attacks[0] = PAPER;
+
+    bear.attack = LAST_ATTACK;
+    bear.winner = -1;
+    bear.looser = -1;
+    bear.isdead = FALSE;
+
 }
 
 void populate_stone(void)
@@ -70,14 +81,19 @@ void populate_stone(void)
 
     init_seed_srand();
 
-    stone.x = win_set.maxAnimalWidth * ((double)rand()/RAND_MAX);
-    stone.y = win_set.maxAnimalHeight * ((double)rand()/RAND_MAX);
+    stone.x = 5/*win_set.maxAnimalWidth*/ * ((double)rand()/RAND_MAX);
+    stone.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
 
     for (int i = 0;i<MAX_MOVES;i++)
         stone.moves[i] = LAST_MOVE;
 
     stone.moves[0] = HOLD;
     stone.attacks[0] = ROCK;
+
+    stone.attack = LAST_ATTACK;
+    stone.winner = -1;
+    stone.looser = -1;
+    stone.isdead = FALSE;
 }
 
 void populate_wolf(void)
@@ -89,8 +105,8 @@ void populate_wolf(void)
 
     init_seed_srand();
 
-    wolf.x = win_set.maxAnimalWidth * ((double)rand()/RAND_MAX);
-    wolf.y = win_set.maxAnimalHeight * ((double)rand()/RAND_MAX);
+    wolf.x = 5/*win_set.maxAnimalWidth*/ * ((double)rand()/RAND_MAX);
+    wolf.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
 
     // Random moves
     for (int i = 0;i < MAX_MOVES;i++)
@@ -107,6 +123,11 @@ void populate_wolf(void)
 
         wolf.attacks[j] = rand() % LAST_ATTACK;
     }
+
+    wolf.attack = LAST_ATTACK;
+    wolf.winner = -1;
+    wolf.looser = -1;
+    wolf.isdead = FALSE;
 }
 
 void print_animal(WINDOW *win, animal_t animal)
@@ -210,80 +231,105 @@ void move_animal(animal_t *animal)
 
 // Calculate which attack to use if it has
 // more than one attacks
-void choose_attack(animal_t animal)
+void choose_attack(animal_t *animal)
 {
-    switch(animal.type)
+    switch(animal->type)
     {
         case 'L':
             init_seed_srand();
 
-            animal.attack = animal.attacks[(rand() % 2)];
+            animal->attack = animal->attacks[(rand() % 2)];
 
             break;
         case 'B':
         case 'S':
-            animal.attack = animal.attacks[0];
+            animal->attack = animal->attacks[0];
 
             break;
         case 'W':
             init_seed_srand();
 
-            animal.attack = animal.attacks[(rand() % MAX_ATTACKS)];
+            animal->attack = animal->attacks[(rand() % MAX_ATTACKS)];
 
             break;
     }
 }
 
-void animal_wins(animal_t a, animal_t b)
+void animal_wins(animal_t *a, animal_t *b)
 {
     choose_attack(a);
     choose_attack(b);
 
-    switch(a.attack)
+    // If both animals are alive
+    if (!a->isdead && !b->isdead)
     {
-        case ROCK:
-            if (b.attack == PAPER)
-            {
-                b.winner = TRUE;
-                a.looser = TRUE;
-            }
-            else if (b.attack == SCISSORS)
-            {
-                a.winner = TRUE;
-                b.looser = TRUE;
-            }
+        switch(a->attack)
+        {
+            case ROCK:
+                if (b->attack == PAPER)
+                {
+                    b->winner = TRUE;
+                    a->looser = TRUE;
+                }
+                else if (b->attack == SCISSORS)
+                {
+                    a->winner = TRUE;
+                    b->looser = TRUE;
+                }
 
-            break;
-        case PAPER:
-            if (b.attack == ROCK)
-            {
-                a.winner = TRUE;
-                b.looser = TRUE;
-            }
-            else if (b.attack == SCISSORS)
-            {
-                b.winner = TRUE;
-                a.looser = TRUE;
-            }
+                break;
+            case PAPER:
+                if (b->attack == ROCK)
+                {
+                    a->winner = TRUE;
+                    b->looser = TRUE;
+                }
+                else if (b->attack == SCISSORS)
+                {
+                    b->winner = TRUE;
+                    a->looser = TRUE;
+                }
 
-            break;
-        case SCISSORS:
-            if (b.attack == ROCK)
-            {
-                b.winner = TRUE;
-                a.looser = TRUE;
-            }
-            else if (b.attack == PAPER)
-            {
-                a.winner = TRUE;
-                b.looser = TRUE;
-            }
+                break;
+            case SCISSORS:
+                if (b->attack == ROCK)
+                {
+                    b->winner = TRUE;
+                    a->looser = TRUE;
+                }
+                else if (b->attack == PAPER)
+                {
+                    a->winner = TRUE;
+                    b->looser = TRUE;
+                }
 
-            break;
-        case SUICIDE:
-            break;
-        case LAST_ATTACK:
-            break;
+                break;
+            case SUICIDE:
+                break;
+            case LAST_ATTACK:
+                break;
+        }
+    }
+    else if (a->isdead && !b->isdead)
+    {
+        b->winner = TRUE;
+        a->looser = TRUE;
+    }
+    else if (!a->isdead && b->isdead)
+    {
+        a->winner = TRUE;
+        b->looser = TRUE;
+    }
+
+    if (a->looser)
+    {
+        a->isdead = TRUE;
+        a->type = ' ';
+    }
+    if (b->looser)
+    {
+        b->isdead = TRUE;
+        b->type = ' ';
     }
 }
 
@@ -305,32 +351,31 @@ void check_attacks()
 {
     if (collides(lion, bear))
     {
-        animal_wins(lion, bear);
+        animal_wins(&lion, &bear);
     }
 
     if (collides(lion, stone))
     {
-        animal_wins(lion, stone);
+        animal_wins(&lion, &stone);
     }
 
     if (collides(lion, wolf))
     {
-        animal_wins(lion, wolf);
+        animal_wins(&lion, &wolf);
     }
 
     if (collides(bear, stone))
     {
-        animal_wins(bear, stone);
+        animal_wins(&bear, &stone);
     }
 
     if (collides(bear, wolf))
     {
-        animal_wins(bear, wolf);
+        animal_wins(&bear, &wolf);
     }
 
     if (collides(stone, wolf))
     {
-        animal_wins(stone, wolf);
+        animal_wins(&stone, &wolf);
     }
-
 }

@@ -25,6 +25,7 @@ typedef struct animal
     attacks_t attack;
     char winner;
     char looser;
+    char isdead;
 }animal_t;
 
 // Animal window
@@ -41,8 +42,8 @@ void populate_wolf(void);
 void print_wolf(WINDOW *);
 void print_animals(WINDOW *);
 void move_animal(animal_t *);
-void choose_attack(animal_t);
-void animal_wins(animal_t, animal_t);
+void choose_attack(animal_t *);
+void animal_wins(animal_t *, animal_t *);
 char collides(animal_t, animal_t);
 void check_attacks();
 

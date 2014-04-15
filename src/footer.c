@@ -33,22 +33,22 @@ void print_footer(WINDOW *win)
     footer_width += char_ret[i++];
 
     memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "lion x: %d y: %d", lion.x, lion.y);
+    char_ret[i] = snprintf(buf, sizeof buf, "lion x: %d y: %d attack: %d winner: %d", lion.x, lion.y, lion.attack, lion.winner);
     color_str(win, 0, ++footer_width, 0, 0, buf);
     footer_width += char_ret[i++];
 
     memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "bear x: %d y: %d", bear.x, bear.y);
+    char_ret[i] = snprintf(buf, sizeof buf, "bear x: %d y: %d attack: %d winner: %d", bear.x, bear.y, bear.attack, bear.winner);
     color_str(win, 0, ++footer_width, 0, 0, buf);
     footer_width += char_ret[i++];
 
     memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "stone x: %d y: %d", stone.x, stone.y);
+    char_ret[i] = snprintf(buf, sizeof buf, "stone x: %d y: %d attack: %d winner: %d", stone.x, stone.y, stone.attack, stone.winner);
     color_str(win, 0, ++footer_width, 0, 0, buf);
     footer_width += char_ret[i++];
 
     memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "wolf x: %d y: %d", wolf.x, wolf.y);
+    char_ret[i] = snprintf(buf, sizeof buf, "wolf x: %d y: %d attack: %d winner: %d", wolf.x, wolf.y, wolf.attack, wolf.winner);
     color_str(win, 0, ++footer_width, 0, 0, buf);
     footer_width += char_ret[i++];
 

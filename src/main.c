@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     pthread_t thread_control;
 
     memset(&win_set, 0, sizeof win_set);
-    win_set.speed = 100000;
+    win_set.speed = 1000000;
 
     if (argc != 1)
     {
@@ -111,6 +111,8 @@ int main(int argc, char *argv[])
         move_animal(&bear);
         move_animal(&stone);
         move_animal(&wolf);
+
+        check_attacks();
 
         print_footer(footer_win);
 
