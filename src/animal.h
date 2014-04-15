@@ -23,6 +23,8 @@ typedef struct animal
     moves_t moves[MAX_MOVES];
     attacks_t attacks[MAX_ATTACKS];
     attacks_t attack;
+    char winner;
+    char looser;
 }animal_t;
 
 // Animal window
@@ -39,9 +41,9 @@ void populate_wolf(void);
 void print_wolf(WINDOW *);
 void print_animals(WINDOW *);
 void move_animal(animal_t *);
-void attack_animal(animal_t);
-attacks_t compare_attacks(attacks_t, attacks_t);
-char collides(animal, animal);
+void choose_attack(animal_t);
+void animal_wins(animal_t, animal_t);
+char collides(animal_t, animal_t);
 void check_attacks();
 
 #endif /* ANIMAL_H */

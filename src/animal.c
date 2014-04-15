@@ -210,7 +210,7 @@ void move_animal(animal_t *animal)
 
 // Calculate which attack to use if it has
 // more than one attacks
-void attack_animal(animal_t animal)
+void choose_attack(animal_t animal)
 {
     switch(animal.type)
     {
@@ -234,36 +234,60 @@ void attack_animal(animal_t animal)
     }
 }
 
-attacks_t compare_attacks(attacks_t a, attacks_t b)
+void animal_wins(animal_t a, animal_t b)
 {
-    switch(a)
+    choose_attack(a);
+    choose_attack(b);
+
+    switch(a.attack)
     {
         case ROCK:
-            if (b == PAPER)
-                return b;
-            else if (b == SCISSORS)
-                return a;
+            if (b.attack == PAPER)
+            {
+                b.winner = TRUE;
+                a.looser = TRUE;
+            }
+            else if (b.attack == SCISSORS)
+            {
+                a.winner = TRUE;
+                b.looser = TRUE;
+            }
 
             break;
         case PAPER:
-            if (b == ROCK)
-                return a;
-            else if (b == SCISSORS)
-                return b;
+            if (b.attack == ROCK)
+            {
+                a.winner = TRUE;
+                b.looser = TRUE;
+            }
+            else if (b.attack == SCISSORS)
+            {
+                b.winner = TRUE;
+                a.looser = TRUE;
+            }
 
             break;
         case SCISSORS:
-            if (b == ROCK)
-                return b;
-            else if (b == PAPER)
-                return a;
+            if (b.attack == ROCK)
+            {
+                b.winner = TRUE;
+                a.looser = TRUE;
+            }
+            else if (b.attack == PAPER)
+            {
+                a.winner = TRUE;
+                b.looser = TRUE;
+            }
 
             break;
+        case SUICIDE:
+            break;
+        case LAST_ATTACK:
+            break;
     }
-
-    return LAST_ATTACK;
 }
 
+// Check if two animals collide
 char collides(animal_t a, animal_t b)
 {
     if (a.x == b.x)
@@ -279,43 +303,34 @@ char collides(animal_t a, animal_t b)
 
 void check_attacks()
 {
-    attacks_t result = LAST_ATTACK;
-
     if (collides(lion, bear))
     {
-        attack_animal(lion);
-        attack_animal(bear);
-        result = compare_attacks(lion.attack, bear.attack);
-
+        animal_wins(lion, bear);
     }
 
     if (collides(lion, stone))
     {
-        attack_animal(lion);
-        attack_animal(stone);
-        result = compare_attacks(lion.attack, stone.attack);
+        animal_wins(lion, stone);
     }
 
     if (collides(lion, wolf))
     {
-        attack_animal(lion);
-        attack_animal(wolf);
-        result = compare_attacks(lion.attack, wolf.attack);
+        animal_wins(lion, wolf);
     }
 
     if (collides(bear, stone))
     {
-        attack_animal(bear);
-        attack_animal(stone);
-        result = compare_attacks(bear.attack, stone.attack);
+        animal_wins(bear, stone);
     }
 
     if (collides(bear, wolf))
     {
+        animal_wins(bear, wolf);
     }
 
     if (collides(stone, wolf))
     {
+        animal_wins(stone, wolf);
     }
 
 }
