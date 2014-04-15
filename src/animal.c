@@ -202,7 +202,120 @@ void move_animal(animal_t *animal)
             break;
         case HOLD:
             break;
+        case LAST_MOVE:
+            break;
 
     }
 }
 
+// Calculate which attack to use if it has
+// more than one attacks
+void attack_animal(animal_t animal)
+{
+    switch(animal.type)
+    {
+        case 'L':
+            init_seed_srand();
+
+            animal.attack = animal.attacks[(rand() % 2)];
+
+            break;
+        case 'B':
+        case 'S':
+            animal.attack = animal.attacks[0];
+
+            break;
+        case 'W':
+            init_seed_srand();
+
+            animal.attack = animal.attacks[(rand() % MAX_ATTACKS)];
+
+            break;
+    }
+}
+
+attacks_t compare_attacks(attacks_t a, attacks_t b)
+{
+    switch(a)
+    {
+        case ROCK:
+            if (b == PAPER)
+                return b;
+            else if (b == SCISSORS)
+                return a;
+
+            break;
+        case PAPER:
+            if (b == ROCK)
+                return a;
+            else if (b == SCISSORS)
+                return b;
+
+            break;
+        case SCISSORS:
+            if (b == ROCK)
+                return b;
+            else if (b == PAPER)
+                return a;
+
+            break;
+    }
+
+    return LAST_ATTACK;
+}
+
+char collides(animal_t a, animal_t b)
+{
+    if (a.x == b.x)
+        if (a.y == b.y)
+            return TRUE;
+
+    if (a.y == b.y)
+        if (a.x == b.x)
+            return TRUE;
+
+    return FALSE;
+}
+
+void check_attacks()
+{
+    attacks_t result = LAST_ATTACK;
+
+    if (collides(lion, bear))
+    {
+        attack_animal(lion);
+        attack_animal(bear);
+        result = compare_attacks(lion.attack, bear.attack);
+
+    }
+
+    if (collides(lion, stone))
+    {
+        attack_animal(lion);
+        attack_animal(stone);
+        result = compare_attacks(lion.attack, stone.attack);
+    }
+
+    if (collides(lion, wolf))
+    {
+        attack_animal(lion);
+        attack_animal(wolf);
+        result = compare_attacks(lion.attack, wolf.attack);
+    }
+
+    if (collides(bear, stone))
+    {
+        attack_animal(bear);
+        attack_animal(stone);
+        result = compare_attacks(bear.attack, stone.attack);
+    }
+
+    if (collides(bear, wolf))
+    {
+    }
+
+    if (collides(stone, wolf))
+    {
+    }
+
+}
