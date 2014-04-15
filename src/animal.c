@@ -27,8 +27,8 @@ void populate_lion(void)
     lion.attacks[1] = SCISSORS;
 
     lion.attack = LAST_ATTACK;
-    lion.winner = -1;
-    lion.looser = -1;
+    lion.winner = FALSE;
+    lion.looser = FALSE;
     lion.isdead = FALSE;
 }
 
@@ -66,8 +66,8 @@ void populate_bear(void)
     bear.attacks[0] = PAPER;
 
     bear.attack = LAST_ATTACK;
-    bear.winner = -1;
-    bear.looser = -1;
+    bear.winner = FALSE;
+    bear.looser = FALSE;
     bear.isdead = FALSE;
 
 }
@@ -91,8 +91,8 @@ void populate_stone(void)
     stone.attacks[0] = ROCK;
 
     stone.attack = LAST_ATTACK;
-    stone.winner = -1;
-    stone.looser = -1;
+    stone.winner = FALSE;
+    stone.looser = FALSE;
     stone.isdead = FALSE;
 }
 
@@ -125,8 +125,8 @@ void populate_wolf(void)
     }
 
     wolf.attack = LAST_ATTACK;
-    wolf.winner = -1;
-    wolf.looser = -1;
+    wolf.winner = FALSE;
+    wolf.looser = FALSE;
     wolf.isdead = FALSE;
 }
 
