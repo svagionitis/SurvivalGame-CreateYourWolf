@@ -325,12 +325,22 @@ void animal_wins(animal_t *a, animal_t *b)
     {
         a->isdead = TRUE;
         a->type = ' ';
+        // Set hold move if dead
+        for (int i = 0;i<MAX_MOVES;i++)
+            a->moves[i] = HOLD;
     }
     if (b->looser)
     {
         b->isdead = TRUE;
         b->type = ' ';
+        for (int i = 0;i<MAX_MOVES;i++)
+            b->moves[i] = HOLD;
     }
+
+    a->winner = FALSE;
+    a->looser = FALSE;
+    b->winner = FALSE;
+    b->looser = FALSE;
 }
 
 // Check if two animals collide
