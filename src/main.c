@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <curses.h>
 #include <pthread.h>
+#include <stdint.h>
 #include "utils.h"
 #include "header.h"
 #include "footer.h"
@@ -64,9 +65,9 @@ int main(int argc, char *argv[])
         use_default_colors();
 
         // Initialize color pairs.
-        short pair_count = 0;
-        for(short i = 0;i<COLORS;i++)
-            for(short j = 0;j<COLORS;j++)
+        uint16_t pair_count = 0;
+        for(uint16_t i = 0;i<COLORS;i++)
+            for(uint16_t j = 0;j<COLORS;j++)
                 init_pair(pair_count++, i, j);
     }
 

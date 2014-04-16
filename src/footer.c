@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdint.h>
 #include "footer.h"
 #include "header.h"
 #include "animal.h"
@@ -12,8 +13,8 @@ void print_footer(WINDOW *win)
     getmaxyx(footer_win, win_set.maxFooterHeight, win_set.maxFooterWidth);
 
     char buf[50];
-    int char_ret[8], i = 0;
-    int footer_width = 0;
+    int32_t char_ret[8], i = 0;
+    uint32_t footer_width = 0;
 
     wclear(win);
 

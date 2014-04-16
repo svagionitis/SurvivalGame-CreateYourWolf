@@ -18,7 +18,7 @@ void populate_lion(void)
     lion.x = 5/*win_set.maxAnimalWidth*/ * ((double)rand()/RAND_MAX);
     lion.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
 
-    for (int i = 0;i<MAX_MOVES;i++)
+    for (uint32_t i = 0;i<MAX_MOVES;i++)
         lion.moves[i] = END_MOVE;
 
     lion.moves[0] = DOWN;
@@ -44,7 +44,7 @@ void populate_bear(void)
     bear.x = 5/*win_set.maxAnimalWidth*/ * ((double)rand()/RAND_MAX);
     bear.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
 
-    for (int i = 0;i<MAX_MOVES;i++)
+    for (uint32_t i = 0;i<MAX_MOVES;i++)
         bear.moves[i] = END_MOVE;
 
     bear.moves[0] = DOWN;
@@ -84,7 +84,7 @@ void populate_stone(void)
     stone.x = 5/*win_set.maxAnimalWidth*/ * ((double)rand()/RAND_MAX);
     stone.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
 
-    for (int i = 0;i<MAX_MOVES;i++)
+    for (uint32_t i = 0;i<MAX_MOVES;i++)
         stone.moves[i] = END_MOVE;
 
     stone.moves[0] = HOLD;
@@ -109,7 +109,7 @@ void populate_wolf(void)
     wolf.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
 
     // Random moves
-    for (int i = 0;i < MAX_MOVES;i++)
+    for (uint32_t i = 0;i < MAX_MOVES;i++)
     {
         init_seed_srand();
 
@@ -117,7 +117,7 @@ void populate_wolf(void)
     }
 
     // Random attacks
-    for (int j = 0;j < MAX_ATTACKS;j++)
+    for (uint32_t j = 0;j < MAX_ATTACKS;j++)
     {
         init_seed_srand();
 
@@ -137,7 +137,7 @@ void print_animal(WINDOW *win, animal_t animal)
     // Print surrounding of radius MAX_SURROUNDING_RADIUS
     if (win_set.set_surrounding_area)
     {
-        for (int i = 1;i <= MAX_SURROUNDING_RADIUS;i++)
+        for (int32_t i = 1;i <= MAX_SURROUNDING_RADIUS;i++)
         {
             if (animal.x + i < win_set.maxAnimalWidth)
                 color_str(win, animal.y, animal.x + i, 0, COLOR_WHITE, " ");
@@ -180,7 +180,7 @@ void print_animals(WINDOW *win)
 
 void move_animal(animal_t *animal)
 {
-    unsigned int index_move = 0;
+    uint32_t index_move = 0;
 
     if (animal->type == 'L') // Lion has two moves
         index_move = win_set.days % 2;
@@ -326,14 +326,14 @@ void animal_wins(animal_t *a, animal_t *b)
         a->isdead = TRUE;
         a->type = ' ';
         // Set hold move if dead
-        for (int i = 0;i<MAX_MOVES;i++)
+        for (uint32_t i = 0;i<MAX_MOVES;i++)
             a->moves[i] = HOLD;
     }
     if (b->looser)
     {
         b->isdead = TRUE;
         b->type = ' ';
-        for (int i = 0;i<MAX_MOVES;i++)
+        for (uint32_t i = 0;i<MAX_MOVES;i++)
             b->moves[i] = HOLD;
     }
 

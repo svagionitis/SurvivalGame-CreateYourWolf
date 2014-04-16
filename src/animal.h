@@ -2,6 +2,7 @@
 #define ANIMAL_H
 
 #include <curses.h>
+#include <stdint.h>
 
 #define MAX_MOVES 20
 #define MAX_ATTACKS 10
@@ -17,15 +18,15 @@ typedef enum attacks {ROCK, PAPER, SCISSORS, SUICIDE, END_ATTACK} attacks_t;
 
 typedef struct animal
 {
-    char type;
-    int x;
-    int y;
+    int8_t type;
+    int32_t x;
+    int32_t y;
     moves_t moves[MAX_MOVES];
     attacks_t attacks[MAX_ATTACKS];
     attacks_t attack;
-    char winner;
-    char looser;
-    char isdead;
+    uint8_t winner;
+    uint8_t looser;
+    uint8_t isdead;
 }animal_t;
 
 // Animal window

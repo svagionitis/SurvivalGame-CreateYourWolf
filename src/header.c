@@ -9,8 +9,8 @@ void print_header(WINDOW *win)
     getmaxyx(header_win, win_set.maxHeaderHeight, win_set.maxHeaderWidth);
 
     char buf[50];
-    int char_ret[9], i = 0;
-    int header_width = 0;
+    int32_t char_ret[9], i = 0;
+    uint32_t header_width = 0;
 
     wclear(win);
 

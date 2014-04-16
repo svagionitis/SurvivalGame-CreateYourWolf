@@ -2,25 +2,26 @@
 #define HEADER_H
 
 #include <curses.h>
+#include <stdint.h>
 
 #define HEADER_ROWS 1
 
 typedef struct window_settings
 {
-    int maxWidth;
-    int maxHeight;
-    int maxHeaderWidth;
-    int maxHeaderHeight;
-    int maxAnimalWidth;
-    int maxAnimalHeight;
-    int maxFooterWidth;
-    int maxFooterHeight;
-    char c;
-    char last_char;
-    int speed;
-    int set_border;
-    int set_surrounding_area;
-    int days;
+    int32_t maxWidth;
+    int32_t maxHeight;
+    int32_t maxHeaderWidth;
+    int32_t maxHeaderHeight;
+    int32_t maxAnimalWidth;
+    int32_t maxAnimalHeight;
+    int32_t maxFooterWidth;
+    int32_t maxFooterHeight;
+    int8_t c;
+    int8_t last_char;
+    uint32_t speed;
+    uint8_t set_border;
+    uint8_t set_surrounding_area;
+    uint64_t days;
 }window_settings_t;
 
 // Header window
