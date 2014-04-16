@@ -19,14 +19,14 @@ void populate_lion(void)
     lion.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
 
     for (int i = 0;i<MAX_MOVES;i++)
-        lion.moves[i] = LAST_MOVE;
+        lion.moves[i] = END_MOVE;
 
     lion.moves[0] = DOWN;
     lion.moves[1] = RIGHT;
     lion.attacks[0] = PAPER;
     lion.attacks[1] = SCISSORS;
 
-    lion.attack = LAST_ATTACK;
+    lion.attack = END_ATTACK;
     lion.winner = FALSE;
     lion.looser = FALSE;
     lion.isdead = FALSE;
@@ -45,7 +45,7 @@ void populate_bear(void)
     bear.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
 
     for (int i = 0;i<MAX_MOVES;i++)
-        bear.moves[i] = LAST_MOVE;
+        bear.moves[i] = END_MOVE;
 
     bear.moves[0] = DOWN;
     bear.moves[1] = DOWN;
@@ -65,7 +65,7 @@ void populate_bear(void)
     bear.moves[15] = LEFT;
     bear.attacks[0] = PAPER;
 
-    bear.attack = LAST_ATTACK;
+    bear.attack = END_ATTACK;
     bear.winner = FALSE;
     bear.looser = FALSE;
     bear.isdead = FALSE;
@@ -85,12 +85,12 @@ void populate_stone(void)
     stone.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
 
     for (int i = 0;i<MAX_MOVES;i++)
-        stone.moves[i] = LAST_MOVE;
+        stone.moves[i] = END_MOVE;
 
     stone.moves[0] = HOLD;
     stone.attacks[0] = ROCK;
 
-    stone.attack = LAST_ATTACK;
+    stone.attack = END_ATTACK;
     stone.winner = FALSE;
     stone.looser = FALSE;
     stone.isdead = FALSE;
@@ -113,7 +113,7 @@ void populate_wolf(void)
     {
         init_seed_srand();
 
-        wolf.moves[i] = rand() % LAST_MOVE;
+        wolf.moves[i] = rand() % END_MOVE;
     }
 
     // Random attacks
@@ -121,10 +121,10 @@ void populate_wolf(void)
     {
         init_seed_srand();
 
-        wolf.attacks[j] = rand() % LAST_ATTACK;
+        wolf.attacks[j] = rand() % END_ATTACK;
     }
 
-    wolf.attack = LAST_ATTACK;
+    wolf.attack = END_ATTACK;
     wolf.winner = FALSE;
     wolf.looser = FALSE;
     wolf.isdead = FALSE;
@@ -223,7 +223,7 @@ void move_animal(animal_t *animal)
             break;
         case HOLD:
             break;
-        case LAST_MOVE:
+        case END_MOVE:
             break;
 
     }
@@ -306,7 +306,7 @@ void animal_wins(animal_t *a, animal_t *b)
                 break;
             case SUICIDE:
                 break;
-            case LAST_ATTACK:
+            case END_ATTACK:
                 break;
         }
     }

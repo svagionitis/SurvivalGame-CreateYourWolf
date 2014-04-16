@@ -11,9 +11,9 @@
 #define MAX_STONES 1
 #define MAX_WOLVES 1
 
-typedef enum moves {UP, DOWN, RIGHT, LEFT, HOLD, LAST_MOVE} moves_t;
+typedef enum moves {UP, DOWN, RIGHT, LEFT, HOLD, END_MOVE} moves_t;
 // PAPER wins ROCK, ROCK wins SCISSORS, SCISSORS win PAPER,
-typedef enum attacks {ROCK, PAPER, SCISSORS, SUICIDE, LAST_ATTACK} attacks_t;
+typedef enum attacks {ROCK, PAPER, SCISSORS, SUICIDE, END_ATTACK} attacks_t;
 
 typedef struct animal
 {
