@@ -38,3 +38,8 @@ void init_seed_srand(void)
 
     srand(t.tv_usec * t.tv_sec);
 }
+
+int32_t select_percentage_coverage_onscreen(double coverage, int32_t maxWidth, int32_t maxHeight)
+{
+    return (int32_t)(coverage * (double)(maxWidth * maxHeight));
+}
