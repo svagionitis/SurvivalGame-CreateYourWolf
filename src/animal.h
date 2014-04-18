@@ -29,6 +29,8 @@ typedef struct animal
     uint8_t isdead;
 }animal_t;
 
+animal_t lion, bear, stone, wolf;
+
 // Animal window
 WINDOW *animal_win;
 

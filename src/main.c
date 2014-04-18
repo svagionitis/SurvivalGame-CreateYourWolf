@@ -16,8 +16,6 @@
 window_settings_t win_set;
 WINDOW *main_win;
 
-animal_t lion, bear, stone, wolf;
-
 
 int main(int argc, char *argv[])
 {

@@ -4,7 +4,6 @@
 #include "utils.h"
 
 extern window_settings_t win_set;
-extern animal_t lion, bear, stone, wolf;
 
 void populate_lion(void)
 {
