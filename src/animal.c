@@ -346,6 +346,21 @@ char collides(animal_t a, animal_t b)
 
 void check_attacks()
 {
+    for (int32_t i = 0;i<win_set.total_animals;i++)
+    {
+        for (int32_t j = 0;j<win_set.total_animals;j++)
+        {
+            if (i == j)
+                continue;
+
+            if (collides(all_animals[i], all_animals[j]))
+            {
+                animal_wins(&all_animals[i], &all_animals[j]);
+            }
+        }
+    }
+
+#if 0
     if (collides(lion, bear))
     {
         animal_wins(&lion, &bear);
@@ -375,4 +390,5 @@ void check_attacks()
     {
         animal_wins(&stone, &wolf);
     }
+#endif
 }
