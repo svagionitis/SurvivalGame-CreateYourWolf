@@ -18,158 +18,92 @@ void populate_animals(WINDOW *win, double percent_cov)
 
     for (int32_t i = 0;i<win_set.total_animals;i++)
     {
-
+        // Choose the animal. For now they are evenly
+        // chosen
         all_animals[i].kind = i % 4;
+
+        // Initialize moves array
+        for (uint32_t j = 0;j<MAX_MOVES;j++)
+            all_animals[i].moves[j] = END_MOVE;
+
+        // Initialize attacks array
+        for (uint32_t j = 0;j<MAX_ATTACKS;j++)
+            all_animals[i].attacks[j] = END_ATTACK;
 
         switch(all_animals[i].kind)
         {
             case LION:
                 all_animals[i].type = 'L';
 
+                all_animals[i].moves[0] = DOWN;
+                all_animals[i].moves[1] = RIGHT;
+                all_animals[i].attacks[0] = PAPER;
+                all_animals[i].attacks[1] = SCISSORS;
+
                 break;
             case BEAR:
                 all_animals[i].type = 'B';
+
+                all_animals[i].moves[0] = DOWN;
+                all_animals[i].moves[1] = DOWN;
+                all_animals[i].moves[2] = DOWN;
+                all_animals[i].moves[3] = DOWN;
+                all_animals[i].moves[4] = RIGHT;
+                all_animals[i].moves[5] = RIGHT;
+                all_animals[i].moves[6] = RIGHT;
+                all_animals[i].moves[7] = RIGHT;
+                all_animals[i].moves[8] = UP;
+                all_animals[i].moves[9] = UP;
+                all_animals[i].moves[10] = UP;
+                all_animals[i].moves[11] = UP;
+                all_animals[i].moves[12] = LEFT;
+                all_animals[i].moves[13] = LEFT;
+                all_animals[i].moves[14] = LEFT;
+                all_animals[i].moves[15] = LEFT;
+                all_animals[i].attacks[0] = PAPER;
 
                 break;
             case STONE:
                 all_animals[i].type = 'S';
 
+                all_animals[i].moves[0] = HOLD;
+                all_animals[i].attacks[0] = ROCK;
+
                 break;
             case WOLF:
                 all_animals[i].type = 'W';
+
+                // Random moves
+                for (uint32_t j = 0;j < MAX_MOVES;j++)
+                {
+                    init_seed_srand();
+
+                    all_animals[i].moves[j] = rand() % END_MOVE;
+                }
+
+                // Random attacks
+                for (uint32_t j = 0;j < MAX_ATTACKS;j++)
+                {
+                    init_seed_srand();
+
+                    all_animals[i].attacks[j] = rand() % END_ATTACK;
+                }
 
                 break;
             case END_ANIMAL:
                 break;
         }
 
+        init_seed_srand();
+
         all_animals[i].x = winMaxWidth * ((double)rand()/RAND_MAX);
         all_animals[i].y = winMaxHeight * ((double)rand()/RAND_MAX);
+
+        all_animals[i].attack = END_ATTACK;
+        all_animals[i].winner = FALSE;
+        all_animals[i].looser = FALSE;
+        all_animals[i].isdead = FALSE;
     }
-}
-
-void populate_lion(void)
-{
-    lion.type = 'L';
-
-    // Put random coordinates
-    // the first time
-
-    init_seed_srand();
-
-    lion.x = 5/*win_set.maxAnimalWidth*/ * ((double)rand()/RAND_MAX);
-    lion.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
-
-    for (uint32_t i = 0;i<MAX_MOVES;i++)
-        lion.moves[i] = END_MOVE;
-
-    lion.moves[0] = DOWN;
-    lion.moves[1] = RIGHT;
-    lion.attacks[0] = PAPER;
-    lion.attacks[1] = SCISSORS;
-
-    lion.attack = END_ATTACK;
-    lion.winner = FALSE;
-    lion.looser = FALSE;
-    lion.isdead = FALSE;
-}
-
-void populate_bear(void)
-{
-    bear.type = 'B';
-
-    // Put random coordinates
-    // the first time
-
-    init_seed_srand();
-
-    bear.x = 5/*win_set.maxAnimalWidth*/ * ((double)rand()/RAND_MAX);
-    bear.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
-
-    for (uint32_t i = 0;i<MAX_MOVES;i++)
-        bear.moves[i] = END_MOVE;
-
-    bear.moves[0] = DOWN;
-    bear.moves[1] = DOWN;
-    bear.moves[2] = DOWN;
-    bear.moves[3] = DOWN;
-    bear.moves[4] = RIGHT;
-    bear.moves[5] = RIGHT;
-    bear.moves[6] = RIGHT;
-    bear.moves[7] = RIGHT;
-    bear.moves[8] = UP;
-    bear.moves[9] = UP;
-    bear.moves[10] = UP;
-    bear.moves[11] = UP;
-    bear.moves[12] = LEFT;
-    bear.moves[13] = LEFT;
-    bear.moves[14] = LEFT;
-    bear.moves[15] = LEFT;
-    bear.attacks[0] = PAPER;
-
-    bear.attack = END_ATTACK;
-    bear.winner = FALSE;
-    bear.looser = FALSE;
-    bear.isdead = FALSE;
-
-}
-
-void populate_stone(void)
-{
-    stone.type = 'S';
-
-    // Put random coordinates
-    // the first time
-
-    init_seed_srand();
-
-    stone.x = 5/*win_set.maxAnimalWidth*/ * ((double)rand()/RAND_MAX);
-    stone.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
-
-    for (uint32_t i = 0;i<MAX_MOVES;i++)
-        stone.moves[i] = END_MOVE;
-
-    stone.moves[0] = HOLD;
-    stone.attacks[0] = ROCK;
-
-    stone.attack = END_ATTACK;
-    stone.winner = FALSE;
-    stone.looser = FALSE;
-    stone.isdead = FALSE;
-}
-
-void populate_wolf(void)
-{
-    wolf.type = 'W';
-
-    // Put random coordinates
-    // the first time
-
-    init_seed_srand();
-
-    wolf.x = 5/*win_set.maxAnimalWidth*/ * ((double)rand()/RAND_MAX);
-    wolf.y = 5/*win_set.maxAnimalHeight*/ * ((double)rand()/RAND_MAX);
-
-    // Random moves
-    for (uint32_t i = 0;i < MAX_MOVES;i++)
-    {
-        init_seed_srand();
-
-        wolf.moves[i] = rand() % END_MOVE;
-    }
-
-    // Random attacks
-    for (uint32_t j = 0;j < MAX_ATTACKS;j++)
-    {
-        init_seed_srand();
-
-        wolf.attacks[j] = rand() % END_ATTACK;
-    }
-
-    wolf.attack = END_ATTACK;
-    wolf.winner = FALSE;
-    wolf.looser = FALSE;
-    wolf.isdead = FALSE;
 }
 
 void print_animal(WINDOW *win, animal_t animal)
@@ -212,13 +146,6 @@ void print_animals(WINDOW *win)
 
     wclear(win);
 
-#if 0
-    print_animal(win, lion);
-    print_animal(win, bear);
-    print_animal(win, stone);
-    print_animal(win, wolf);
-#endif
-
     for (int32_t i = 0;i<win_set.total_animals;i++)
     {
         print_animal(win, all_animals[i]);
@@ -231,13 +158,13 @@ void move_animal(animal_t *animal)
 {
     uint32_t index_move = 0;
 
-    if (animal->type == 'L') // Lion has two moves
+    if (animal->kind == LION) // Lion has two moves
         index_move = win_set.days % 2;
-    else if (animal->type == 'B') // Bear has 16 moves
+    else if (animal->kind == BEAR) // Bear has 16 moves
         index_move = win_set.days % 16;
-    else if (animal->type == 'S') // Stone has 1 move
+    else if (animal->kind == STONE) // Stone has 1 move
         index_move = win_set.days % 1;
-    else if (animal->type == 'W') // Wolf has MAX moves
+    else if (animal->kind == WOLF) // Wolf has MAX moves
         index_move = win_set.days % MAX_MOVES;
 
     switch(animal->moves[index_move])
@@ -278,28 +205,39 @@ void move_animal(animal_t *animal)
     }
 }
 
+void move_animals()
+{
+    for (int32_t i = 0;i<win_set.total_animals;i++)
+    {
+        move_animal(&all_animals[i]);
+    }
+
+}
+
 // Calculate which attack to use if it has
 // more than one attacks
 void choose_attack(animal_t *animal)
 {
-    switch(animal->type)
+    switch(animal->kind)
     {
-        case 'L':
+        case LION:
             init_seed_srand();
 
             animal->attack = animal->attacks[(rand() % 2)];
 
             break;
-        case 'B':
-        case 'S':
+        case BEAR:
+        case STONE:
             animal->attack = animal->attacks[0];
 
             break;
-        case 'W':
+        case WOLF:
             init_seed_srand();
 
             animal->attack = animal->attacks[(rand() % MAX_ATTACKS)];
 
+            break;
+        case END_ANIMAL:
             break;
     }
 }

@@ -44,17 +44,10 @@ animal_t lion, bear, stone, wolf, *all_animals;
 WINDOW *animal_win;
 
 void populate_animals(WINDOW *, double);
-void populate_lion(void);
 void print_animal(WINDOW *, animal_t);
-void print_lion(WINDOW *);
-void populate_bear(void);
-void print_bear(WINDOW *);
-void populate_stone(void);
-void print_stone(WINDOW *);
-void populate_wolf(void);
-void print_wolf(WINDOW *);
 void print_animals(WINDOW *);
 void move_animal(animal_t *);
+void move_animals();
 void choose_attack(animal_t *);
 void animal_wins(animal_t *, animal_t *);
 char collides(animal_t, animal_t);
