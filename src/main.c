@@ -24,9 +24,17 @@ int main(int argc, char *argv[])
     memset(&win_set, 0, sizeof win_set);
     win_set.speed = 1000000;
 
-    if (argc != 1)
+    if (argc != 2)
     {
-        printf("Usage: %s\n", argv[0]);
+        printf("Usage: %s [percent coverage of screen with animals]\n", argv[0]);
+        printf("Example: %s 0.1\n", argv[0]);
+        return -1;
+    }
+
+    double percent_coverage = atof(argv[1]);
+    if (percent_coverage > 1.0 || percent_coverage <= 0.0)
+    {
+        printf("Value should be between 0.0 and 1.0\n");
         return -1;
     }
 
@@ -90,8 +98,8 @@ int main(int argc, char *argv[])
     // Enable the keypad for non-char keys
     keypad(stdscr, TRUE);
 
-    // Populate animals in the 10% of screen
-    populate_animals(animal_win, 0.001);
+    // Populate animals in the precent_coverage*100 of screen
+    populate_animals(animal_win, percent_coverage);
 
 
     // Put control in a separate thread
