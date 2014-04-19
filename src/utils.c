@@ -65,7 +65,8 @@ void init_seed_srand(void)
  * \param   maxWidth            The maximum width of screen.
  * \param   maxHeight           The maximum height of screen.
  */
-void calculate_coverage_onscreen(int32_t ret_coverage, double percent_coverage, int32_t maxWidth, int32_t maxHeight)
+void calculate_coverage_onscreen(int32_t *ret_coverage, double percent_coverage, int32_t maxWidth, int32_t maxHeight)
 {
-    ret_coverage = (int32_t)(percent_coverage * (double)(maxWidth * maxHeight));
+    *ret_coverage = (int32_t)(percent_coverage * (double)(maxWidth * maxHeight));
 }
+

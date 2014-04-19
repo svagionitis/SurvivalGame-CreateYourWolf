@@ -22,6 +22,7 @@ typedef struct window_settings
     uint8_t set_border;
     uint8_t set_surrounding_area;
     uint64_t days;
+    int32_t total_animals;
 }window_settings_t;
 
 // Header window

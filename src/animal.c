@@ -5,6 +5,49 @@
 
 extern window_settings_t win_set;
 
+void populate_animals(WINDOW *win, double percent_cov)
+{
+    int32_t winMaxWidth = 0, winMaxHeight = 0;
+
+    getmaxyx(win, winMaxHeight, winMaxWidth);
+
+    calculate_coverage_onscreen(&win_set.total_animals, percent_cov, winMaxWidth, winMaxHeight);
+
+    // Allocate memory for all the animals.
+    all_animals = (animal_t *)calloc(win_set.total_animals, sizeof(animal_t));
+
+    for (int32_t i = 0;i<win_set.total_animals;i++)
+    {
+
+        all_animals[i].kind = i % 4;
+
+        switch(all_animals[i].kind)
+        {
+            case LION:
+                all_animals[i].type = 'L';
+
+                break;
+            case BEAR:
+                all_animals[i].type = 'B';
+
+                break;
+            case STONE:
+                all_animals[i].type = 'S';
+
+                break;
+            case WOLF:
+                all_animals[i].type = 'W';
+
+                break;
+            case END_ANIMAL:
+                break;
+        }
+
+        all_animals[i].x = winMaxWidth * ((double)rand()/RAND_MAX);
+        all_animals[i].y = winMaxHeight * ((double)rand()/RAND_MAX);
+    }
+}
+
 void populate_lion(void)
 {
     lion.type = 'L';
@@ -169,10 +212,17 @@ void print_animals(WINDOW *win)
 
     wclear(win);
 
+#if 0
     print_animal(win, lion);
     print_animal(win, bear);
     print_animal(win, stone);
     print_animal(win, wolf);
+#endif
+
+    for (int32_t i = 0;i<win_set.total_animals;i++)
+    {
+        print_animal(win, all_animals[i]);
+    }
 
     wnoutrefresh(win);
 }

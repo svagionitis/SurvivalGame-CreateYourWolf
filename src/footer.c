@@ -14,7 +14,7 @@ void print_footer(WINDOW *win)
     getmaxyx(footer_win, win_set.maxFooterHeight, win_set.maxFooterWidth);
 
     char buf[50];
-    int32_t char_ret[8], i = 0;
+    int32_t char_ret[5], i = 0;
     uint32_t footer_width = 0;
 
     wclear(win);
@@ -35,22 +35,7 @@ void print_footer(WINDOW *win)
     footer_width += char_ret[i++];
 
     memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "%c[x: %d y: %d attack: %d dead: %d]", lion.type, lion.x, lion.y, lion.attack, lion.isdead);
-    color_str(win, 0, ++footer_width, 0, 0, buf);
-    footer_width += char_ret[i++];
-
-    memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "%c[x: %d y: %d attack: %d dead: %d]", bear.type, bear.x, bear.y, bear.attack, bear.isdead);
-    color_str(win, 0, ++footer_width, 0, 0, buf);
-    footer_width += char_ret[i++];
-
-    memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "%c[x: %d y: %d attack: %d dead: %d]", stone.type, stone.x, stone.y, stone.attack, stone.isdead);
-    color_str(win, 0, ++footer_width, 0, 0, buf);
-    footer_width += char_ret[i++];
-
-    memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "%c[x: %d y: %d attack: %d dead: %d]", wolf.type, wolf.x, wolf.y, wolf.attack, wolf.isdead);
+    char_ret[i] = snprintf(buf, sizeof buf, "total animals: %d", win_set.total_animals);
     color_str(win, 0, ++footer_width, 0, 0, buf);
     footer_width += char_ret[i++];
 

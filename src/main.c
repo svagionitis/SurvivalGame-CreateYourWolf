@@ -90,11 +90,16 @@ int main(int argc, char *argv[])
     // Enable the keypad for non-char keys
     keypad(stdscr, TRUE);
 
+#if 0
     // Populate animals with characteristics
     populate_lion();
     populate_bear();
     populate_stone();
     populate_wolf();
+#endif
+
+    // Populate animals in the 10% of screen
+    populate_animals(animal_win, 0.1);
 
 
     // Put control in a separate thread
@@ -106,10 +111,12 @@ int main(int argc, char *argv[])
 
         print_animals(animal_win);
 
+#if 0
         move_animal(&lion);
         move_animal(&bear);
         move_animal(&stone);
         move_animal(&wolf);
+#endif
 
         check_attacks();
 
@@ -120,6 +127,9 @@ int main(int argc, char *argv[])
         doupdate();
         usleep(win_set.speed);
     }
+
+    if (all_animals)
+        free(all_animals);
 
     pthread_join(thread_control, NULL);
 
