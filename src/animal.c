@@ -346,6 +346,7 @@ char collides(animal_t a, animal_t b)
 
 void check_attacks()
 {
+    // TODO Try to avoid somehow the double for loop
     for (int32_t i = 0;i<win_set.total_animals;i++)
     {
         for (int32_t j = 0;j<win_set.total_animals;j++)
@@ -359,36 +360,4 @@ void check_attacks()
             }
         }
     }
-
-#if 0
-    if (collides(lion, bear))
-    {
-        animal_wins(&lion, &bear);
-    }
-
-    if (collides(lion, stone))
-    {
-        animal_wins(&lion, &stone);
-    }
-
-    if (collides(lion, wolf))
-    {
-        animal_wins(&lion, &wolf);
-    }
-
-    if (collides(bear, stone))
-    {
-        animal_wins(&bear, &stone);
-    }
-
-    if (collides(bear, wolf))
-    {
-        animal_wins(&bear, &wolf);
-    }
-
-    if (collides(stone, wolf))
-    {
-        animal_wins(&stone, &wolf);
-    }
-#endif
 }
