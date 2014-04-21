@@ -35,7 +35,7 @@ void print_footer(WINDOW *win)
     footer_width += char_ret[i++];
 
     memset(buf, '\0', sizeof buf);
-    char_ret[i] = snprintf(buf, sizeof buf, "total animals: %d", win_set.total_animals);
+    char_ret[i] = snprintf(buf, sizeof buf, "total animals: %d dead animals: %d", win_set.total_animals, count_dead_animals());
     color_str(win, 0, ++footer_width, 0, 0, buf);
     footer_width += char_ret[i++];
 

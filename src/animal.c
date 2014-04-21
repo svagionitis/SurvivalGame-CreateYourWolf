@@ -33,7 +33,7 @@ void populate_animals(WINDOW *win, double percent_cov)
         switch(all_animals[i].kind)
         {
             case LION:
-                all_animals[i].type = 'L';
+                all_animals[i].print_type = 'L';
 
                 all_animals[i].moves[0] = DOWN;
                 all_animals[i].moves[1] = RIGHT;
@@ -42,7 +42,7 @@ void populate_animals(WINDOW *win, double percent_cov)
 
                 break;
             case BEAR:
-                all_animals[i].type = 'B';
+                all_animals[i].print_type = 'B';
 
                 all_animals[i].moves[0] = DOWN;
                 all_animals[i].moves[1] = DOWN;
@@ -64,14 +64,14 @@ void populate_animals(WINDOW *win, double percent_cov)
 
                 break;
             case STONE:
-                all_animals[i].type = 'S';
+                all_animals[i].print_type = 'S';
 
                 all_animals[i].moves[0] = HOLD;
                 all_animals[i].attacks[0] = ROCK;
 
                 break;
             case WOLF:
-                all_animals[i].type = 'W';
+                all_animals[i].print_type = 'W';
 
                 // Random moves
                 for (uint32_t j = 0;j < MAX_MOVES;j++)
@@ -108,7 +108,7 @@ void populate_animals(WINDOW *win, double percent_cov)
 
 void print_animal(WINDOW *win, animal_t animal)
 {
-    color_str(win, animal.y, animal.x, 0, COLOR_BLACK, (const char *)&animal.type);
+    color_str(win, animal.y, animal.x, 0, COLOR_BLACK, (const char *)&animal.print_type);
 
     // Print surrounding of radius MAX_SURROUNDING_RADIUS
     if (win_set.set_surrounding_area)
@@ -311,7 +311,7 @@ void animal_wins(animal_t *a, animal_t *b)
     if (a->looser)
     {
         a->isdead = TRUE;
-        a->type = ' ';
+        a->print_type = ' ';
         // Set hold move if dead
         for (uint32_t i = 0;i<MAX_MOVES;i++)
             a->moves[i] = HOLD;
@@ -319,7 +319,7 @@ void animal_wins(animal_t *a, animal_t *b)
     if (b->looser)
     {
         b->isdead = TRUE;
-        b->type = ' ';
+        b->print_type = ' ';
         for (uint32_t i = 0;i<MAX_MOVES;i++)
             b->moves[i] = HOLD;
     }
@@ -349,9 +349,15 @@ void check_attacks()
     // TODO Try to avoid somehow the double for loop
     for (int32_t i = 0;i<win_set.total_animals;i++)
     {
+        if (all_animals[i].isdead)
+            continue;
+
         for (int32_t j = 0;j<win_set.total_animals;j++)
         {
             if (i == j)
+                continue;
+
+            if (all_animals[j].isdead)
                 continue;
 
             if (collides(all_animals[i], all_animals[j]))
@@ -360,4 +366,17 @@ void check_attacks()
             }
         }
     }
+}
+
+uint32_t count_dead_animals()
+{
+    uint32_t sum = 0;
+
+    for (int32_t i = 0;i<win_set.total_animals;i++)
+    {
+        if (all_animals[i].isdead)
+            sum += 1;
+    }
+
+    return sum;
 }

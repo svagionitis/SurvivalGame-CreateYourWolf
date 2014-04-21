@@ -26,7 +26,7 @@ static double ANIMAL_PERCENT_COVERAGE[MAX_ANIMALS] = {0.25, 0.25, 0.25, 0.25};
 
 typedef struct animal
 {
-    int8_t type;
+    int8_t print_type;
     animal_kind_t kind;
     int32_t x;
     int32_t y;
@@ -52,5 +52,6 @@ void choose_attack(animal_t *);
 void animal_wins(animal_t *, animal_t *);
 char collides(animal_t, animal_t);
 void check_attacks();
+uint32_t count_dead_animals();
 
 #endif /* ANIMAL_H */
