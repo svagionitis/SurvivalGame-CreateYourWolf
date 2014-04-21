@@ -337,10 +337,6 @@ char collides(animal_t a, animal_t b)
         if (a.y == b.y)
             return TRUE;
 
-    if (a.y == b.y)
-        if (a.x == b.x)
-            return TRUE;
-
     return FALSE;
 }
 
