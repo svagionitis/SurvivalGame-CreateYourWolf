@@ -14,7 +14,7 @@ SET(CMAKE_C_FLAGS "-D_BSD_SOURCE -std=c99 -Wall -W -O2")
 
 SET(LIBS ${CMAKE_THREAD_LIBS_INIT} ncurses)
 
-INCLUDE_DIRECTORIES(src)
+INCLUDE_DIRECTORIES(include)
 
 # Set the source file
 SET(SNAKENCURSES_SRC src/utils.c
