@@ -78,7 +78,7 @@ struct sllist_node {
 #define SLLIST_HEAD_INIT(name)	{ NULL }
 #define SLLIST_HEAD(name)	struct sllist_head name = SLLIST_HEAD_INIT(name)
 
-static inline uint32_t xchg(uint32_t x, volatile void *ptr)
+static inline uint32_t xchg(volatile void *ptr, uint32_t x)
 {
     uint32_t ret;
 
