@@ -14,3 +14,7 @@ the following
 
 If the architecture is AMD 64 bit then the name of the directory would look like `build-x86_64/`. The name of the executable is `wolf`.
 
+Example
+=======
+
+An example can be seen [here](http://showterm.io/0c9d2f914904ae37a69a4)
