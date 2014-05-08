@@ -311,7 +311,7 @@ void animal_wins(animal_t *a, animal_t *b)
     if (a->looser)
     {
         a->isdead = TRUE;
-        a->print_type = ' ';
+        a->print_type = DEAD_ANIMAL_PRINT;
         // Set hold move if dead
         for (uint32_t i = 0;i<MAX_MOVES;i++)
             a->moves[i] = HOLD;
@@ -319,7 +319,7 @@ void animal_wins(animal_t *a, animal_t *b)
     if (b->looser)
     {
         b->isdead = TRUE;
-        b->print_type = ' ';
+        b->print_type = DEAD_ANIMAL_PRINT;
         for (uint32_t i = 0;i<MAX_MOVES;i++)
             b->moves[i] = HOLD;
     }

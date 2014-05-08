@@ -13,6 +13,8 @@
 #define MAX_STONES 1
 #define MAX_WOLVES 1
 
+#define DEAD_ANIMAL_PRINT '\0'
+
 typedef enum moves {UP, DOWN, RIGHT, LEFT, HOLD, END_MOVE} moves_t;
 
 // PAPER wins ROCK, ROCK wins SCISSORS, SCISSORS win PAPER,
