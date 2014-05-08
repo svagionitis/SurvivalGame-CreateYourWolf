@@ -46,8 +46,12 @@ int main(int argc, char *argv[])
     // Create window for the header rows
     header_win = newwin(HEADER_ROWS, win_set.maxWidth, 0, 0);
 
+    getmaxyx(header_win, win_set.maxHeaderHeight, win_set.maxHeaderWidth);
+
     // Create window for the footer rows
     footer_win = newwin(FOOTER_ROWS, win_set.maxWidth, win_set.maxHeight - FOOTER_ROWS, 0);
+
+    getmaxyx(footer_win, win_set.maxFooterHeight, win_set.maxFooterWidth);
 
     // Create main window, it's between the header and the footer
     animal_win = newwin(win_set.maxHeight - HEADER_ROWS - FOOTER_ROWS, win_set.maxWidth, HEADER_ROWS, 0);
