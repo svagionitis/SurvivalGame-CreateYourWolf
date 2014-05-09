@@ -110,31 +110,34 @@ void print_animal(WINDOW *win, animal_t animal)
 {
     color_str(win, animal.y, animal.x, 0, COLOR_BLACK, (const char *)&animal.print_type);
 
-    // Print surrounding of radius MAX_SURROUNDING_RADIUS
-    if (win_set.set_surrounding_area)
+    // Print surrounding of radius MAX_SURROUNDING_RADIUS if animal is alive
+    if (win_set.set_surrounding_area && !animal.isdead)
     {
         for (int32_t i = 1;i <= MAX_SURROUNDING_RADIUS;i++)
         {
-            if (animal.x + i < win_set.maxAnimalWidth)
-                color_str(win, animal.y, animal.x + i, 0, COLOR_WHITE, " ");
+            for (int32_t j = 1;j <= MAX_SURROUNDING_RADIUS;j++)
+            {
+                if (animal.x + i < win_set.maxAnimalWidth)
+                    color_str(win, animal.y, animal.x + i, 0, COLOR_WHITE, " ");
 
-            if (animal.x - i >= 0)
-                color_str(win, animal.y, animal.x - i, 0, COLOR_WHITE, " ");
+                if (animal.x - i >= 0)
+                    color_str(win, animal.y, animal.x - i, 0, COLOR_WHITE, " ");
 
-            if (animal.y + i < win_set.maxAnimalHeight)
-                color_str(win, animal.y + i, animal.x, 0, COLOR_WHITE, " ");
+                if (animal.y + j < win_set.maxAnimalHeight)
+                    color_str(win, animal.y + j, animal.x, 0, COLOR_WHITE, " ");
 
-            if (animal.y - i >= 0)
-                color_str(win, animal.y - i, animal.x, 0, COLOR_WHITE, " ");
+                if (animal.y - j >= 0)
+                    color_str(win, animal.y - j, animal.x, 0, COLOR_WHITE, " ");
 
-            if (animal.x + i < win_set.maxAnimalWidth && animal.y + i < win_set.maxAnimalHeight)
-                color_str(win, animal.y + i, animal.x + i, 0, COLOR_WHITE, " ");
-            if (animal.x + i < win_set.maxAnimalWidth && animal.y - i >= 0)
-                color_str(win, animal.y - i, animal.x + i, 0, COLOR_WHITE, " ");
-            if (animal.x - i >= 0 && animal.y + i < win_set.maxAnimalHeight)
-                color_str(win, animal.y + i, animal.x - i, 0, COLOR_WHITE, " ");
-            if (animal.x - i >= 0 && animal.y - i >= 0)
-                color_str(win, animal.y - i, animal.x - i, 0, COLOR_WHITE, " ");
+                if (animal.x + i < win_set.maxAnimalWidth && animal.y + j < win_set.maxAnimalHeight)
+                    color_str(win, animal.y + j, animal.x + i, 0, COLOR_WHITE, " ");
+                if (animal.x + i < win_set.maxAnimalWidth && animal.y - j >= 0)
+                    color_str(win, animal.y - j, animal.x + i, 0, COLOR_WHITE, " ");
+                if (animal.x - i >= 0 && animal.y + j < win_set.maxAnimalHeight)
+                    color_str(win, animal.y + j, animal.x - i, 0, COLOR_WHITE, " ");
+                if (animal.x - i >= 0 && animal.y - j >= 0)
+                    color_str(win, animal.y - j, animal.x - i, 0, COLOR_WHITE, " ");
+            }
         }
     }
 }
