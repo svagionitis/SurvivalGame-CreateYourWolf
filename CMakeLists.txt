@@ -23,6 +23,7 @@ SET(SNAKENCURSES_SRC src/utils.c
 		     src/control.c
 		     src/animal.c
 		     src/main.c
+		     src/attack_strategy.c
 		     src/move_strategy.c)
 
 ADD_EXECUTABLE(wolf ${SNAKENCURSES_SRC})

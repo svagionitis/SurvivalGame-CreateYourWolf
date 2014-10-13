@@ -4,6 +4,7 @@
 #include "utils.h"
 
 #include "move_strategy.h"
+#include "attack_strategy.h"
 
 extern window_settings_t win_set;
 
@@ -39,8 +40,7 @@ void populate_animals(WINDOW *win, double percent_cov)
 
                 lion_moves(all_animals[i].moves);
 
-                all_animals[i].attacks[0] = PAPER;
-                all_animals[i].attacks[1] = SCISSORS;
+                lion_attacks(all_animals[i].attacks);
 
                 break;
             case BEAR:
@@ -48,7 +48,7 @@ void populate_animals(WINDOW *win, double percent_cov)
 
                 bear_moves(all_animals[i].moves);
 
-                all_animals[i].attacks[0] = PAPER;
+                bear_attacks(all_animals[i].attacks);
 
                 break;
             case STONE:
@@ -56,7 +56,7 @@ void populate_animals(WINDOW *win, double percent_cov)
 
                 stone_moves(all_animals[i].moves);
 
-                all_animals[i].attacks[0] = ROCK;
+                stone_attacks(all_animals[i].attacks);
 
                 break;
             case WOLF:
@@ -65,13 +65,7 @@ void populate_animals(WINDOW *win, double percent_cov)
 
                 wolf_moves(all_animals[i].moves);
 
-                // Random attacks
-                for (uint32_t j = 0;j < MAX_ATTACKS;j++)
-                {
-                    init_seed_srand();
-
-                    all_animals[i].attacks[j] = rand() % END_ATTACK;
-                }
+                wolf_attacks(all_animals[i].attacks);
 
                 break;
             case END_ANIMAL:
