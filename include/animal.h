@@ -26,7 +26,7 @@ typedef enum animal_kind {LION, BEAR, STONE, WOLF, END_ANIMAL} animal_kind_t;
 // The sum should always be 1.0
 static double ANIMAL_PERCENT_COVERAGE[MAX_ANIMALS] = {0.25, 0.25, 0.25, 0.25};
 
-typedef void (*move_strategy_t)(moves_t *moves[]);
+typedef void (*move_strategy_t)(moves_t moves[]);
 typedef void (*attack_strategy_t)(attacks_t *attacks[], attacks_t *attack);
 
 typedef struct animal
@@ -36,8 +36,10 @@ typedef struct animal
     int32_t x;
     int32_t y;
     moves_t moves[MAX_MOVES];
+    move_strategy_t move_strategy;
     attacks_t attacks[MAX_ATTACKS];
     attacks_t attack;
+    attack_strategy_t attack_strategy;
     uint8_t winner;
     uint8_t looser;
     uint8_t isdead;

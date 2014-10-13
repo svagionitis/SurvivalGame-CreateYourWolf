@@ -3,6 +3,8 @@
 #include "animal.h"
 #include "utils.h"
 
+#include "move_strategy.h"
+
 extern window_settings_t win_set;
 
 void populate_animals(WINDOW *win, double percent_cov)
@@ -35,8 +37,8 @@ void populate_animals(WINDOW *win, double percent_cov)
             case LION:
                 all_animals[i].print_type = 'L';
 
-                all_animals[i].moves[0] = DOWN;
-                all_animals[i].moves[1] = RIGHT;
+                lion_moves(all_animals[i].moves);
+
                 all_animals[i].attacks[0] = PAPER;
                 all_animals[i].attacks[1] = SCISSORS;
 
@@ -44,42 +46,24 @@ void populate_animals(WINDOW *win, double percent_cov)
             case BEAR:
                 all_animals[i].print_type = 'B';
 
-                all_animals[i].moves[0] = DOWN;
-                all_animals[i].moves[1] = DOWN;
-                all_animals[i].moves[2] = DOWN;
-                all_animals[i].moves[3] = DOWN;
-                all_animals[i].moves[4] = RIGHT;
-                all_animals[i].moves[5] = RIGHT;
-                all_animals[i].moves[6] = RIGHT;
-                all_animals[i].moves[7] = RIGHT;
-                all_animals[i].moves[8] = UP;
-                all_animals[i].moves[9] = UP;
-                all_animals[i].moves[10] = UP;
-                all_animals[i].moves[11] = UP;
-                all_animals[i].moves[12] = LEFT;
-                all_animals[i].moves[13] = LEFT;
-                all_animals[i].moves[14] = LEFT;
-                all_animals[i].moves[15] = LEFT;
+                bear_moves(all_animals[i].moves);
+
                 all_animals[i].attacks[0] = PAPER;
 
                 break;
             case STONE:
                 all_animals[i].print_type = 'S';
 
-                all_animals[i].moves[0] = HOLD;
+                stone_moves(all_animals[i].moves);
+
                 all_animals[i].attacks[0] = ROCK;
 
                 break;
             case WOLF:
                 all_animals[i].print_type = 'W';
 
-                // Random moves
-                for (uint32_t j = 0;j < MAX_MOVES;j++)
-                {
-                    init_seed_srand();
 
-                    all_animals[i].moves[j] = rand() % END_MOVE;
-                }
+                wolf_moves(all_animals[i].moves);
 
                 // Random attacks
                 for (uint32_t j = 0;j < MAX_ATTACKS;j++)

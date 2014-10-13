@@ -10,7 +10,7 @@ SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 FIND_PACKAGE(Threads REQUIRED)
 FIND_PACKAGE(Curses REQUIRED)
 
-SET(CMAKE_C_FLAGS "-D_BSD_SOURCE -std=c99 -Wall -W -O2")
+SET(CMAKE_C_FLAGS "-D_BSD_SOURCE -g -std=c99 -Wall -W -O2")
 
 SET(LIBS ${CMAKE_THREAD_LIBS_INIT} ncurses)
 
@@ -22,7 +22,8 @@ SET(SNAKENCURSES_SRC src/utils.c
 		     src/footer.c
 		     src/control.c
 		     src/animal.c
-		     src/main.c)
+		     src/main.c
+		     src/move_strategy.c)
 
 ADD_EXECUTABLE(wolf ${SNAKENCURSES_SRC})
 
