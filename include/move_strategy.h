@@ -1,11 +1,15 @@
 #ifndef MOVE_STRATEGY_H
 #define MOVE_STRATEGY_H
 
+#include <stdint.h>
+
 #define MAX_MOVES 20
 
 typedef enum moves {UP, DOWN, RIGHT, LEFT, HOLD, END_MOVE} moves_t;
 
 typedef void (*move_strategy_t)(moves_t moves[]);
+
+uint32_t count_moves(moves_t moves[]);
 
 void move_strategy_caller(void (*move_strategy_t)(moves_t []), moves_t moves[]);
 

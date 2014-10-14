@@ -135,15 +135,7 @@ void move_animal(animal_t *animal)
 {
     uint32_t index_move = 0;
 
-    //TODO: Change modulo here.
-    if (animal->kind == LION) // Lion has two moves
-        index_move = win_set.days % 2;
-    else if (animal->kind == BEAR) // Bear has 16 moves
-        index_move = win_set.days % 16;
-    else if (animal->kind == STONE) // Stone has 1 move
-        index_move = win_set.days % 1;
-    else if (animal->kind == WOLF) // Wolf has MAX moves
-        index_move = win_set.days % MAX_MOVES;
+    index_move = win_set.days % count_moves(animal->moves);
 
     switch(animal->moves[index_move])
     {

@@ -1,7 +1,20 @@
 #include "move_strategy.h"
 #include "utils.h"
-#include <stdint.h>
 #include <stdlib.h>
+
+uint32_t count_moves(moves_t moves[])
+{
+    uint32_t counter = 0;
+    for (uint32_t i = 0;i < MAX_MOVES;i++)
+    {
+        if (moves[i] == END_MOVE)
+            break;
+
+        counter++;
+    }
+
+    return counter;
+}
 
 void move_strategy_caller(void (*move_strategy_t)(moves_t []), moves_t moves[])
 {
