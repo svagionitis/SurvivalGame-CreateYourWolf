@@ -3,6 +3,11 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+void move_strategy_caller(void (*move_strategy_t)(moves_t []), moves_t moves[])
+{
+    move_strategy_t(moves);
+}
+
 void lion_moves(moves_t moves[])
 {
     moves[0] = DOWN;

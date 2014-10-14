@@ -1,12 +1,12 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
 
+#include "move_strategy.h"
+#include "attack_strategy.h"
 #include <curses.h>
 #include <stdint.h>
 
 #define MAX_ANIMALS 4
-#define MAX_MOVES 20
-#define MAX_ATTACKS 10
 #define MAX_SURROUNDING_RADIUS 1
 #define MAX_LIONS 1
 #define MAX_BEARS 1
@@ -15,19 +15,11 @@
 
 #define DEAD_ANIMAL_PRINT '\0'
 
-typedef enum moves {UP, DOWN, RIGHT, LEFT, HOLD, END_MOVE} moves_t;
-
-// PAPER wins ROCK, ROCK wins SCISSORS, SCISSORS win PAPER,
-typedef enum attacks {ROCK, PAPER, SCISSORS, SUICIDE, END_ATTACK} attacks_t;
-
 // Kind of animals that can be used.
 typedef enum animal_kind {LION, BEAR, STONE, WOLF, END_ANIMAL} animal_kind_t;
 
 // The sum should always be 1.0
 static double ANIMAL_PERCENT_COVERAGE[MAX_ANIMALS] = {0.25, 0.25, 0.25, 0.25};
-
-typedef void (*move_strategy_t)(moves_t moves[]);
-typedef void (*attack_strategy_t)(attacks_t attacks[]);
 
 typedef struct animal
 {

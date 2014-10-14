@@ -3,9 +3,6 @@
 #include "animal.h"
 #include "utils.h"
 
-#include "move_strategy.h"
-#include "attack_strategy.h"
-
 extern window_settings_t win_set;
 
 void populate_animals(WINDOW *win, double percent_cov)
@@ -38,34 +35,33 @@ void populate_animals(WINDOW *win, double percent_cov)
             case LION:
                 all_animals[i].print_type = 'L';
 
-                lion_moves(all_animals[i].moves);
+                move_strategy_caller(lion_moves, all_animals[i].moves);
 
-                lion_attacks(all_animals[i].attacks);
+                attack_strategy_caller(lion_attacks, all_animals[i].attacks);
 
                 break;
             case BEAR:
                 all_animals[i].print_type = 'B';
 
-                bear_moves(all_animals[i].moves);
+                move_strategy_caller(bear_moves, all_animals[i].moves);
 
-                bear_attacks(all_animals[i].attacks);
+                attack_strategy_caller(bear_attacks, all_animals[i].attacks);
 
                 break;
             case STONE:
                 all_animals[i].print_type = 'S';
 
-                stone_moves(all_animals[i].moves);
+                move_strategy_caller(stone_moves, all_animals[i].moves);
 
-                stone_attacks(all_animals[i].attacks);
+                attack_strategy_caller(stone_attacks, all_animals[i].attacks);
 
                 break;
             case WOLF:
                 all_animals[i].print_type = 'W';
 
+                move_strategy_caller(wolf_moves, all_animals[i].moves);
 
-                wolf_moves(all_animals[i].moves);
-
-                wolf_attacks(all_animals[i].attacks);
+                attack_strategy_caller(wolf_attacks, all_animals[i].attacks);
 
                 break;
             case END_ANIMAL:
