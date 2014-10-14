@@ -135,6 +135,7 @@ void move_animal(animal_t *animal)
 {
     uint32_t index_move = 0;
 
+    //TODO: Change modulo here.
     if (animal->kind == LION) // Lion has two moves
         index_move = win_set.days % 2;
     else if (animal->kind == BEAR) // Bear has 16 moves
