@@ -193,7 +193,7 @@ void choose_attack(animal_t *animal)
         case LION:
             init_seed_srand();
 
-            animal->attack = animal->attacks[(rand() % 2)];
+            animal->attack = animal->attacks[(rand() % count_attacks(animal->attacks))];
 
             break;
         case BEAR:
