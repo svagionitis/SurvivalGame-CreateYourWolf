@@ -41,6 +41,11 @@ void stone_moves(moves_t moves[])
 
 void wolf_moves(moves_t moves[])
 {
+    random_moves(moves);
+}
+
+void random_moves(moves_t moves[])
+{
     // Random moves
     for (uint32_t j = 0;j < MAX_MOVES;j++)
     {
@@ -50,4 +55,5 @@ void wolf_moves(moves_t moves[])
     }
 
 }
+
 

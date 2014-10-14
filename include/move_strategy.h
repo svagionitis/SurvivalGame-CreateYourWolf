@@ -13,5 +13,6 @@ void lion_moves(moves_t moves[]);
 void bear_moves(moves_t moves[]);
 void stone_moves(moves_t moves[]);
 void wolf_moves(moves_t moves[]);
+void random_moves(moves_t moves[]);
 
 #endif /* MOVE_STRATEGY_H */
